@@ -1,0 +1,5 @@
+java.io.InputStream is an abstract class which is also the superclass of all classes representing an input stream of bytes. The template method is read(byte[] b, int off, int len) which calls the abstract method read(). Subclasses of InputStream override this method in order to provide a more efficient implementation.
+
+java.io.OutputStream is an abstract class which is also the superclass of all classes representing an output stream of bytes. The template method is write(byte[] b, int off, int len) which calls the abstract method write(int b). Subclasses of OutputStream override this method in order to provide a more efficient implementation.
+
+java.io.Reader is an abstract class for reading character streams. Its subclasses must implement read(char cbuf[], int off, int len) and close() with the read() being the template method.
