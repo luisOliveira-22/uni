@@ -1,0 +1,65 @@
+group stats;
+
+declare(type, id, isSet) ::= <<
+<type> <id><if(isSet)> = new HashSet\<\>()<endif>;
+>>
+
+assign(stat, id, value) ::= <<
+<stats(stat)>
+<id> = <value>;
+>>
+
+print(stat, message) ::= <<
+<stats(stat)>
+System.out.println(<message>);
+>>
+
+numericBinaryExpr(stat,type,var,e1,op,e2) ::= <<
+<stats(stat)>
+<type> <var> = <e1> <op> <e2>;
+>>
+
+numericUnaryExpr(stat,type,var,op,e) ::= <<
+<stats(stat)>
+<type> <var> = <op><e>;
+>>
+
+addSetElement(stat, id, element, addAll) ::= <<
+<stats(stat)>
+<id>.add<if(addAll)>All<endif>(<element>);
+>>
+
+setOperation(stat, e1, op, e2, isAssignment) ::= <<
+<stats(stat)>
+<e1>.<op>(<e2>)<if(!isAssignment)>;<endif>
+>>
+
+readInput(id, message) ::= <<
+System.out.print(<message>);
+String <id> = sc.nextLine();
+>>
+
+numToNum(stat, type1, var1, type2, var2) ::= <<
+<stats(stat)>
+<type1> <var1> = (<type1>) <var2>;
+>>
+
+numToString(stat, var1, var2) ::= <<
+<stats(stat)>
+String <var1> = String.valueOf(<var2>);
+>>
+
+stringToNum(stat, type, var1, var2) ::= <<
+<stats(stat)>
+<type> <var1> = <type>.valueOf(<var2>);
+>>
+
+setToNum(stat, type, var1, var2, method) ::= <<
+<stats(stat)>
+Set\<<type>\> <var1> = new HashSet\<\>();
+for (String s : <var2>.split(",")) {
+    <var1>.add(<type>.<method>(s));
+}
+>>
+
+

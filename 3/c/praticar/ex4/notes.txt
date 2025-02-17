@@ -1,0 +1,5 @@
+antlr4-build
+antlr4-test -gui < FILE.txt
+antlr4-visitor GRAMMAR VISITOR OBJECT
+antlr4-main -i -v VISITOR.java
+antlr4-run

@@ -1,0 +1,22 @@
+group main;
+
+import "stats.stg"
+
+mainClass(stat) ::= <<
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Output {
+
+    private static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        <stats(stat)>
+    }
+}
+>>
+
+stats(stat) ::= <<
+<if(stat)><stat; separator="\n"><endif>
+>>

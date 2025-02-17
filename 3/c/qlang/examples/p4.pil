@@ -1,0 +1,20 @@
+-- Procedural Imperative Language -- errors
+
+writeln 1:0; -- runtime error
+-- No exception is throwed, nor the program is abruptly terminated
+-- instead, the program will be in a special error state, in which all
+-- remaining instructions wil not be executed (kinda of an exceptional state)
+-- until a predicate applied to error attribute is performed:
+
+write "Ignored!"; -- in error state
+if error then -- error recovery
+   -- here, error as resumed the normal false value
+   writeln "Normal execution resumed"
+end;
+
+n := integer("1a2b3");
+e := error; -- also error recovery
+if e then
+   writeln text(error) -- special conversion (last error error message): "invalid conversion to integer [integer("1a2b3")]"
+end
+
