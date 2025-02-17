@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_remove_permission <session file> <role> <username>/<permission>
+python3 client.py rep_remove_permission $1 $2 $3

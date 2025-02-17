@@ -1,0 +1,10 @@
+delivery1/
+delivery2/
+*.enc
+*/venv/*
+*.pyc
+*/private/*
+*/files/*
+*/sessions/*
+*/metadatas/*
+

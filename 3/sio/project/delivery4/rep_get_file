@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_get_file <file handle> [file]
+python3 client.py rep_get_file $1 $2

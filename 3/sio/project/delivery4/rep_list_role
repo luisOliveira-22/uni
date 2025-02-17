@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_list_role <session file> <role>
+python3 client.py rep_list_role $1 $2

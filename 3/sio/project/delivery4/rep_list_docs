@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_list_docs <session file> [-s username] [-d nt/ot/et date]
+python3 client.py rep_list_docs $1 $2 $3

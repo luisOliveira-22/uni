@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_add_doc <session file> <document name> <file> [alg]
+python3 client.py rep_add_doc $1 $2 $3 $4

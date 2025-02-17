@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# rep_get_rep_key
+python3 client.py rep_get_rep_key
