@@ -1,0 +1,20 @@
+-- Procedural Imperative Language -- conditional
+
+n := integer(read "Number: "); -- type conversion: type(expression)
+write "Number ",n, " is ";
+if n % 2 = 0 then -- = is the comparison operator (as in math)
+   writeln "even"
+else
+   writeln "odd"
+end;
+
+-- The language must accept boolean expressions:
+--   relational operators:  =   /=   >   <   >=   <=
+--   boolean operators:  and   or   and then   or else   xor   implies
+--   aritmetic operators:  *  :  %  +  - (division with : and %)
+-- Operators (and then) and (or else) are non-strict logical operators.
+-- Unlike related strict operators (and, or), this operators only evaluated the right operand if the first
+-- one does not dictate the boolean expression result (meaning that the right operand may be undefined).
+-- Example:  den /= 0 and then num:den > limit
+
+

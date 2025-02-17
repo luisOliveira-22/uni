@@ -1,0 +1,12 @@
+-- Procedural Imperative Language -- input&output
+-- This is a single-line comment!
+
+name := read "Name: "; -- read [<prompt>] (always text)
+-- assignment with :=
+-- name is a text variable (type inference resulting from assignment)
+-- existing basic types: integer | real | boolean | text
+writeln "The name is: ", name; -- writes to standard output: The name is: <name>
+-- writeln|write should accept any number of comma separated arguments (output is the concatenation)
+
+-- ; is an instruction separator (last instruction may omit it)
+

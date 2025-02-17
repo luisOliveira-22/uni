@@ -1,0 +1,18 @@
+-- Procedural Imperative Language -- loops
+
+n := integer(read "Number: ");
+is_prime := n = 2 or n % 2 /= 0;
+d := 3;
+loop until not is_prime or d * d >= n do -- it may accept while instead of until
+   is_prime := n % d /= 0
+end;
+
+-- while or until can appear only once, and can be placed anywhere inside the loop:
+--    loop A while COND do B end
+
+if is_prime then
+   writeln "Number ",n," is prime"
+else
+   writeln "Number ",n," is not prime"
+end;
+
