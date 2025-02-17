@@ -1,0 +1,48 @@
+depth:20-1-0-15
+[braga,guimaraes,lamego,guarda,castelobranco,covilha,viseu,agueda,aveiro,coimbra,figueira,leiria,santarem,evora,beja,faro]
+Solution node data:((beja,faro),15,1136,0)
+
+depth/improve:0-14-314-207
+[braga,porto,agueda,coimbra,leiria,santarem,evora,beja,faro]
+Solution node data:((beja,faro),8,706,0)
+
+informeddepth:15-1-0-9
+[braga,guimaraes,porto,agueda,coimbra,leiria,santarem,lisboa,beja,faro]
+Solution node data:((beja,faro),9,751,0)
+
+informeddepth/improve:0-3-165-90
+[braga,porto,agueda,coimbra,leiria,santarem,evora,beja,faro]
+Solution node data:((beja,faro),8,706,0)
+
+astar:159-1-0-85
+[braga,porto,agueda,coimbra,leiria,santarem,evora,beja,faro]
+Solution node data:((beja,faro),8,706,0)
+admissible
+
+Special test with inflated heuristic:not admissible
+
+heuristic=6
+breadth:[putdown(e),unstack(c,d),putdown(c),pickup(d),stack(d,c),pickup(e),stack(e,d),pickup(a),stack(a,e)]
+admissible
+3369-1-0-3091
+
+heuristic=6
+A* : [putdown(e),unstack(c,d),putdown(c),pickup(d),stack(d,c),pickup(e),stack(e,d),pickup(a),stack(a,e)]
+admissible
+78-1-0-44
+
+heuristic=10
+A* : [putdown(e),unstack(g,f),stack(g,b),unstack(f,c),stack(f,g),unstack(c,d),putdown(c),pickup(d),stack(d,c),pickup(e),stack(e,d),pickup(a),stack(a,e)]
+admissible
+161-1-0-98
+
+heuristic=6
+A* : [putdown(e),unstack(h,g),putdown(h),unstack(g,f),stack(g,b),unstack(f,c),stack(f,g),unstack(c,d)]
+admissible
+112-1-0-46
+
+heuristic=6
+A* : [putdown(e),unstack(h,g),putdown(h),unstack(g,f),putdown(g),unstack(f,c),putdown(f),unstack(c,d)]
+admissible
+360-1-0-125
+

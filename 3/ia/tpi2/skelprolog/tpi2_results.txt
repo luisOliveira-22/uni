@@ -1,0 +1,68 @@
+socrates member:[man,philosopher]
+
+socrates subtype:[]
+
+socrates hasHeight:[1.775]
+
+socrates hasWeight:[75]
+
+socrates likes:[sophroniscus,phaenarete,mathematics,philosophy,meat,milk]
+
+socrates hasFather:[sophroniscus]
+
+s_t, c_c, [d, m_f, b_v, s_m]:true-[(b_a,c_s),(c_c,s_s),(c_s,a)]
+
+s_t, c_c, [d]:true-[(b_a,c_s),(b_v,b_a),(b_v,c_s),(b_v,m_f),(b_v,s_m),(c_c,s_s),(c_s,a),(m_f,s_m),(s_s,b_v),(s_s,m_f),(s_s,s_m)]
+
+s_t, s_q, [d]:true-[(b_a,c_s),(b_v,b_a),(b_v,c_s),(b_v,m_f),(c_s,a),(s_p,v_p),(s_q,s_p),(s_q,v_p),(v_p,b_v),(v_p,m_f)]
+
+d, b_v, [car_s]:false-[(b_a,c_s),(b_v,b_a),(b_v,c_s),(b_v,d),(b_v,m_f),(b_v,s_m),(c_c,f_s),(c_c,s_q),(c_c,s_s),(c_c,s_t),(c_s,a),(d,m_f),(f_s,s_q),(f_s,s_t),(m_f,s_m),(s_p,v_p),(s_q,s_p),(s_q,s_t),(s_q,v_p),(s_s,b_v),(s_s,m_f),(s_s,s_m),(s_t,d),(v_p,b_v),(v_p,d),(v_p,m_f)]
+
+d, b_v, [a]:true-[(b_a,c_s),(b_v,b_a),(b_v,c_s)]
+
+[[(q4,2),(q3,4),(q2,1),(q1,3)],[(q4,3),(q3,1),(q2,4),(q1,2)]]
+
+[[(d,blue),(c,green),(e,red),(b,blue),(a,green)],[(d,red),(c,green),(e,blue),(b,red),(a,green)],[(d,green),(c,blue),(e,red),(b,green),(a,blue)],[(d,red),(c,blue),(e,green),(b,red),(a,blue)],[(d,green),(c,red),(e,blue),(b,green),(a,red)],[(d,blue),(c,red),(e,green),(b,blue),(a,red)]]
+
+[(t,8),(w,6),(o,7),(f,1),(u,3),(r,4)]
+[(t,7),(w,6),(o,5),(f,1),(u,3),(r,0)]
+[(t,9),(w,3),(o,8),(f,1),(u,7),(r,6)]
+[(t,9),(w,2),(o,8),(f,1),(u,5),(r,6)]
+[(t,8),(w,4),(o,6),(f,1),(u,9),(r,2)]
+[(t,8),(w,3),(o,6),(f,1),(u,7),(r,2)]
+[(t,7),(w,3),(o,4),(f,1),(u,6),(r,8)]
+[(t,4),(w,7),(o,9),(f,0),(u,5),(r,8)]
+[(t,4),(w,6),(o,9),(f,0),(u,3),(r,8)]
+[(t,4),(w,5),(o,9),(f,0),(u,1),(r,8)]
+[(t,4),(w,3),(o,8),(f,0),(u,7),(r,6)]
+[(t,4),(w,2),(o,8),(f,0),(u,5),(r,6)]
+[(t,4),(w,1),(o,8),(f,0),(u,3),(r,6)]
+[(t,3),(w,5),(o,7),(f,0),(u,1),(r,4)]
+[(t,3),(w,4),(o,6),(f,0),(u,9),(r,2)]
+[(t,2),(w,3),(o,4),(f,0),(u,6),(r,8)]
+[(t,1),(w,9),(o,3),(f,0),(u,8),(r,6)]
+[(t,1),(w,7),(o,3),(f,0),(u,4),(r,6)]
+[(t,1),(w,3),(o,2),(f,0),(u,6),(r,4)]
+Number of solutions:19
+Done in:0.020672082901000977-seconds
+[(t,8),(w,6),(o,7),(f,1),(u,3),(r,4)]
+[(t,7),(w,6),(o,5),(f,1),(u,3),(r,0)]
+[(t,9),(w,3),(o,8),(f,1),(u,7),(r,6)]
+[(t,9),(w,2),(o,8),(f,1),(u,5),(r,6)]
+[(t,8),(w,4),(o,6),(f,1),(u,9),(r,2)]
+[(t,8),(w,3),(o,6),(f,1),(u,7),(r,2)]
+[(t,7),(w,3),(o,4),(f,1),(u,6),(r,8)]
+[(t,4),(w,7),(o,9),(f,0),(u,5),(r,8)]
+[(t,4),(w,6),(o,9),(f,0),(u,3),(r,8)]
+[(t,4),(w,5),(o,9),(f,0),(u,1),(r,8)]
+[(t,4),(w,3),(o,8),(f,0),(u,7),(r,6)]
+[(t,4),(w,2),(o,8),(f,0),(u,5),(r,6)]
+[(t,4),(w,1),(o,8),(f,0),(u,3),(r,6)]
+[(t,3),(w,5),(o,7),(f,0),(u,1),(r,4)]
+[(t,3),(w,4),(o,6),(f,0),(u,9),(r,2)]
+[(t,2),(w,3),(o,4),(f,0),(u,6),(r,8)]
+[(t,1),(w,9),(o,3),(f,0),(u,8),(r,6)]
+[(t,1),(w,7),(o,3),(f,0),(u,4),(r,6)]
+[(t,1),(w,3),(o,2),(f,0),(u,6),(r,4)]
+Number of solutions:19
+Done in:0.017290353775024414-seconds
