@@ -4,17 +4,6 @@ import java.util.Scanner;
 
 public class ex2 {
 
-    // operation = value operator value
-    //
-    // operator -> +, -, *, /, =
-    //
-    // value -> number
-    // value -> variable
-    // value -> operation
-    //
-    // variable -> value
-    // variable -> operation | operator != "="
-
     static Scanner sc = new Scanner(System.in);
     static Map<String, Double> variables = new HashMap<>();
     
@@ -46,41 +35,46 @@ public class ex2 {
     }
 
     private static void processAssignment(String input){
-        
-        double num = 0;
-        String var = "";
-
-        String[] values = input.trim().split("=");
-        
-        if(values.length > 2){
-            System.err.print("Error: Input with too much \"=\"!\n");
+        String[] values = input.trim().split("\\s*=\\s*");
+    
+        if (values.length != 2) {
+            System.err.println("Error: Invalid assignment format.");
+            return;
         }
-        
-        if(values[0].matches("^[a-zA-Z].*")){
-            var = values[0];
-        }else{
-            System.err.print("Error: Variable must start with letter!\n");
+    
+        String var = values[0].trim();
+        String expression = values[1].trim();
+    
+        // Verifica se a variável é válida (começa com letra e não é um número)
+        if (!var.matches("^[a-zA-Z][a-zA-Z0-9]*$")) {
+            System.err.println("Error: Variable must start with a letter and contain only letters or digits.");
+            return;
         }
-        
-        String[] expression = values[1].split("\\s+");
-        if(expression.length % 2 == 0){
-            System.err.print("Error: Invalid expression!\n");
+    
+        try {
+            double result = processExpression(expression);
+            variables.put(var, result);
+        } catch (Exception e) {
+            System.err.println("Error: Invalid expression in assignment.");
         }
-        else{
-            num = processExpression(values[1]);
-        }
-        
-        variables.put(var, num);
     }
+    
 
     private static double processExpression(String input){
         String[] values = input.split("\\s+");
 
         if(values.length == 1){
             // condiçao de ser variavel em vez de numero
-            // ...
+            if (variables.containsKey(values[0])) {
+                return variables.get(values[0]);
+            }
+            // Tenta converter para número
+            try {
+                return Double.parseDouble(values[0]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Error: Undefined variable or invalid number.");
+            }
 
-            return Double.parseDouble(values[0]);
         }
         else if(values.length == 3){
             return calcExpression(values[0], values[1], values[2]);
@@ -93,38 +87,37 @@ public class ex2 {
         return 0;
     }
 
-    private static double calcExpression(String token1, String token2, String token3){
-        double res = 0;
-        try{
-            // condiçao de serem variaveis em vez de numeros
-            // ...
-
-            double value1 = Double.parseDouble(token1);
-            String operator = token2; 
-            double value2 = Double.parseDouble(token3);
-
-            switch (operator) {
-                case "+":
-                    res = value1 + value2;
-                    break;
-                case "-":
-                    res = value1 - value2;
-                    break;
-                case "*":
-                    res = value1 * value2;
-                    break;
-                case "/":
-                    if (value2 == 0) {
-                        System.err.print("Error: Can't be divided by 0.\n");
-                    }
-                    res = value1 / value2;
-                    break;
-                default:
-                    System.err.print("Error: Invalid operator. Use '+', '-', '*' ou '/'.\n");
-            }
-        }catch (Exception e) {
-            System.err.println("Error: Invalid input! Must insert valid numbers.");
+    private static double calcExpression(String token1, String operator, String token2) {
+        double value1, value2;
+    
+        // Se os tokens forem variáveis, pega o valor armazenado
+        if (variables.containsKey(token1)) {
+            value1 = variables.get(token1);
+        } else {
+            value1 = Double.parseDouble(token1);
         }
-        return res;
+    
+        if (variables.containsKey(token2)) {
+            value2 = variables.get(token2);
+        } else {
+            value2 = Double.parseDouble(token2);
+        }
+    
+        switch (operator) {
+            case "+":
+                return value1 + value2;
+            case "-":
+                return value1 - value2;
+            case "*":
+                return value1 * value2;
+            case "/":
+                if (value2 == 0) {
+                    throw new ArithmeticException("Error: Division by zero.");
+                }
+                return value1 / value2;
+            default:
+                throw new IllegalArgumentException("Error: Invalid operator. Use '+', '-', '*' or '/'.");
+        }
     }
+    
 }
