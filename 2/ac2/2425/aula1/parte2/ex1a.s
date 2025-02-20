@@ -1,30 +1,29 @@
-# int main(void)
-# {
-#   char c;
-#   int cnt = 0;
-#   do
-#   {
-#       c = getChar();
-#       putChar( c );
-#       cnt++;
-#   } while( c != '\n' );
-#   printInt(cnt, 10);
-#   return 0;
-# } 
+        .equ getChar, 2
+        .equ putChar, 3
+        .equ printInt, 6
 
-
-        .equ PUT_CHAR, 3
         .data
         .text
         .globl main
 
-main:   li $t1, 0           # cnt = 0
+main:   li $t0, 0               # cnt = 0
 
-do:     li $v0, PUT_CHAR    # putChar
-        add $t1, $t1, 1     # cnt++
-while:  bne  $a0, '\n', do  # while(c != '\n')
-        la $a0, $t1
-        li $v0, PRINT_STR
-        syscall             # printInt(cnt, 10)
-        li $v0,0
-        jr $ra
+do:                             # do{
+        li $v0, getChar                
+        syscall
+        move $t1, $v0           #       c = getChar()
+
+        li $v0, putChar
+        move $a0, $t1
+        syscall                 #       putChar(c)
+
+        addi $t0, $t0, 1        # cnt++
+
+        bne $t1, '\n', do       # }while(c != '\n')
+
+        move $a0, $t0
+        li $a1, 10
+        li $v0, printInt
+        syscall                 # printInt(cnt, 10)
+
+        jr $ra                  # return 0
