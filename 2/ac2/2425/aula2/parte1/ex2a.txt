@@ -1,0 +1,16 @@
+O objetivo da função delay(), apresentada a seguir, é gerar um atraso
+temporal programável múltiplo de 1 ms.
+
+void delay(unsigned int ms) 
+{ 
+    resetCoreTimer(); 
+    while(readCoreTimer() < K * ms); 
+}
+
+a) Determine o valor da constante "K", de modo a que para "ms" igual a
+1 o atraso gerado seja de 1ms (note que K = 20 * 10^6 * t, em que "t"
+é o valor do atraso, em segundos).
+
+###
+
+k = 20 * 10^6 * target = 20 * 10^6 * 1ms = 20 * 10^6 * 1 * 10*-3 = 20 000

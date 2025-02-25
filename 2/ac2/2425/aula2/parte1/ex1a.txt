@@ -1,0 +1,42 @@
+O  core  MIPS  disponível  no  microcontrolador  PIC32  implementa, 
+no  coprocessador  0,  um contador  crescente  de  32  bits  (designado
+por  core  timer)  atualizado  a  cada  dois  ciclos  de relógio do
+CPU. Na placa DETPIC32 o relógio do CPU está configurado a 40 MHz,
+pelo que o contador  é  incrementado  a  uma  frequência  de  relógio
+de  20  MHz.  Isto  significa  que  o  tempo necessário para incrementar
+o contador desde o valor 0 até 20 000 000 é 1 segundo. 
+A placa DETPIC32 disponibiliza dois system calls para interagir com esse
+contador: ler o valor atual do contador (readCoreTimer()) e reiniciar
+a zero o seu valor (resetCoreTimer()).
+
+O  programa  seguinte  incrementa  o  valor  de  uma  variável  e
+de  cada  vez  que  a  variável  é atualizada, o seu valor é
+apresentado no ecrã do PC. 
+
+int main(void) 
+{ 
+    int counter = 0; 
+    while(1) 
+    { 
+        putChar('\r');  // cursor regressa ao inicio da linha no ecrã 
+        printInt(counter, 10 | 4 << 16); // Ver nota de rodapé 1 
+        resetCoreTimer(); 
+        while(readCoreTimer() < 200000); 
+        counter++; 
+    } 
+    return 0; 
+}
+
+a) Qual a frequência de incremento da variável counter?
+
+###
+
+No coprocessador 0 está implementado o core timer (32 bits)
+que é atualizado a cada dois ciclos do relógio (que opera a 40 Mhz).
+
+(40 / 2) MHz = 20 MHz = 20 000 000 Hz  = 1 / 20 000 000 segs
+
+resetCoreTimer(): core timer está a 0
+while(readCoreTimer() < 200000) : espera 200 000 ciclos do core timer
+
+Resposta: 10 ms = 0.01 segs = (1 / 20 000 000) ∗ 200 000
