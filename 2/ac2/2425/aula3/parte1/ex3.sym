@@ -1,0 +1,13 @@
+GAS LISTING ex3.s 			page 1
+
+
+DEFINED SYMBOLS
+               ex3.s:1      *ABS*:000000000000bf88 BASE
+               ex3.s:2      *ABS*:0000000000006100 TRISE
+               ex3.s:3      *ABS*:00000000000060c0 TRISD
+               ex3.s:4      *ABS*:0000000000006120 LATE
+               ex3.s:5      *ABS*:00000000000060d0 PORTD
+               ex3.s:10     .text:0000000000000000 main
+               ex3.s:20     .text:000000000000001c loop
+
+NO UNDEFINED SYMBOLS
