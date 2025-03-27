@@ -1,6 +1,3 @@
-
-// TODO!
-
 #include <detpic32.h>;
 
 unsigned char toBcd(unsigned char value);
@@ -25,39 +22,33 @@ int main(void)
 
     // configure RE0-7 as outputs
     // 1) reset LATE[7] a LATE[0]
-    LATB = LATB & 0xFF00; // reset 1111 1111 0000 0000
+    LATE = LATB & 0xFF00; // reset 1111 1111 0000 0000
     // 2) config TRISE[7] a TRISE[0] como saídas
-    TRISB = TRISB & 0xFF00;
-
-    unsigned int i;
-    int counter = 0;
-    i = 0;
+    TRISE = TRISB & 0xFF00;
+    
+    int i = 0;
+    unsigned char counter = 0;
     while(1)
     {
-        send2displays(counter);
-
-        // wait 10ms (1/100Hz)
+        send2displays(toBcd(counter));
+        LATE = (LATE & 0xFF00) | toBcd(counter);
         delay(10);
-
-        i = (i + 1) % 60;
-        if(i == 0)
+        i++;
+        if (i % 50 == 0)
         {
-            counter = 0;
-        }
-        // inc. counter (mod 256)
-        counter++;       
+            counter++;
+            if (counter == 60)
+            {
+                counter = 0;
+            }
+        }    
     }
-}
-
-unsigned char toBcd(unsigned char value)
-{
-    return ((value / 10) << 4) + (value % 10);
 }
 
 void send2displays(unsigned char value)
 {
     static const char disp7Scodes[] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F, 0x77, 0x7C, 0x39, 0x5E, 0x79, 0x71};
-    //                                     0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
+    //                                  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
     
     static char displayFlag = 0;
 
@@ -80,6 +71,11 @@ void send2displays(unsigned char value)
     }
 
     displayFlag = !displayFlag;
+}
+
+unsigned char toBcd(unsigned char value)
+{
+    return ((value / 10) << 4) + (value % 10);
 }
 
 void delay(int ms)
