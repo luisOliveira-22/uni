@@ -1,0 +1,24 @@
+GAS LISTING ex4.s 			page 1
+
+
+DEFINED SYMBOLS
+               ex4.s:1      *ABS*:000000000000bf88 BASE
+               ex4.s:3      *ABS*:0000000000006100 TRISE
+               ex4.s:4      *ABS*:0000000000006110 PORTE
+               ex4.s:5      *ABS*:0000000000006120 LATE
+               ex4.s:7      *ABS*:0000000000006040 TRISB
+               ex4.s:8      *ABS*:0000000000006050 PORTB
+               ex4.s:9      *ABS*:0000000000006060 LATB
+               ex4.s:11     *ABS*:000000000000000c resetCoreTimer
+               ex4.s:12     *ABS*:000000000000000b readCoreTimer
+               ex4.s:18     .text:0000000000000000 main
+               ex4.s:31     .text:0000000000000020 loop
+               ex4.s:41     .text:000000000000003c if
+               ex4.s:49     .text:0000000000000060 else
+               ex4.s:44     .text:000000000000004c reset_esq
+               ex4.s:55     .text:0000000000000070 endif
+               ex4.s:51     .text:0000000000000064 reset_dir
+               ex4.s:65     .text:0000000000000088 delay
+               ex4.s:68     .text:0000000000000090 wait
+
+NO UNDEFINED SYMBOLS

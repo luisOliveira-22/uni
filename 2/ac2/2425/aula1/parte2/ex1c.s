@@ -67,7 +67,6 @@ main:           la $a0, msg
                 sll $t1, $t1, 16
                 ori $t1, $t1, 10
                 move $a1, $t1
-                li $a1, 10
                 li $v0, printInt
                 syscall                 # printInt(value, 10);
 
