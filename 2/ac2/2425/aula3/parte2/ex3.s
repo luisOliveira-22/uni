@@ -4,6 +4,10 @@
         .equ PORTE, 0x6110
         .equ LATE, 0x6120
 
+        .equ TRISB, 0x6040
+        .equ PORTB, 0x6050
+        .equ LATB, 0x6060
+
         .equ resetCoreTimer, 12
         .equ readCoreTimer, 11
 
@@ -16,9 +20,13 @@ main:
 
         lw $t1, TRISE($t0)              # Read TRISE register  
         andi $t1, $t1, 0xFFE1           # Reset RE4-RE1 (1111 1111 1110 0001) 
-        sw $t1, TRISE($t0)               # Update TRISE register 
+        sw $t1, TRISE($t0)              # Update TRISE register 
 
-        li $t2, 0                       # e.g. up counter (initial value is 0) 
+        lw $t1, TRISB($t0)              # READ TRISB VALUE
+        ori $t1, $t1, 0x0008            # RESET RB3
+        sw $t1, TRISB($t0)              # UPDATE TRISB VALUE
+
+        li $t2, 0                       # counter 
 
 loop:
         lw  $t1, LATE($t0)              # Read LATE register 
@@ -27,10 +35,21 @@ loop:
         or  $t1, $t1, $t3               # Merge counter w/ LATE value 
         sw  $t1, LATE($t0)              # Update LATE register 
 
-        addi $t2, $t2, 1                # count++
+        lw $t3, PORTB($t0)
+        andi $t3, $t3, 0x0008
+
+if:
+        bne $t3, 0x0008, else
+        addi $t2, $t2, 1                # counter++
+        j endif
+
+else:
+        addi $t2, $t2, -1               # counter--
+
+endif:
         andi $t2, $t2, 0x000F           # up counter MOD 16
 
-        li $a0, 1000                    # 1/1 = 1s = 1000ms
+        li $a0, 500                     # 1/2 = 0.5s = 500ms
         jal delay                       # delay(1000)
 
         j loop

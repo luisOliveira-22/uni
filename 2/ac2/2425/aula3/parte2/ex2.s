@@ -27,10 +27,10 @@ loop:
         or  $t1, $t1, $t3               # Merge counter w/ LATE value 
         sw  $t1, LATE($t0)              # Update LATE register 
 
-        addi $t2, $t2, 1                # count++
+        addi $t2, $t2, -1               # count++
         andi $t2, $t2, 0x000F           # up counter MOD 16
 
-        li $a0, 1000                    # 1/1 = 1s = 1000ms
+        li $a0, 250                     # 1/4 = 0.25s = 250ms
         jal delay                       # delay(1000)
 
         j loop
