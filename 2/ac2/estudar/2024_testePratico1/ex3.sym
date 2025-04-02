@@ -1,0 +1,18 @@
+GAS LISTING ex3.s 			page 1
+
+
+DEFINED SYMBOLS
+               ex3.s:1      *ABS*:000000000000bf88 BASE
+               ex3.s:2      *ABS*:0000000000006100 TRISE
+               ex3.s:3      *ABS*:0000000000006120 LATE
+               ex3.s:4      *ABS*:0000000000000003 putChar
+               ex3.s:5      *ABS*:0000000000000006 printInt
+               ex3.s:6      *ABS*:000000000000000c resetCoreTimer
+               ex3.s:7      *ABS*:000000000000000b readCoreTimer
+               ex3.s:13     .text:0000000000000000 main
+               ex3.s:22     .text:0000000000000014 while
+               ex3.s:40     .text:000000000000004c if
+               ex3.s:44     .text:000000000000005c endif
+               ex3.s:48     .text:0000000000000064 while2
+
+NO UNDEFINED SYMBOLS
