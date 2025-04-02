@@ -1,0 +1,32 @@
+#include <detpic32.h>
+
+int main (void){
+	TRISE = TRISE & 0xFFC3;					// 1111 1111 1100 0011
+	TRISBbits.TRISB2 = 1;					// configurar o porto B2 como entrada
+
+	int aux, counter = 0;
+
+	while(1){
+		LATE = LATE & 0xFFC3;
+		aux = counter << 2;				// se nao souberes porque é 2, pensa seu BURRO
+		LATE = LATE | aux;
+
+		printInt(counter, 10 | 2 << 16);		// 0002 000A
+		putChar('\n');
+
+		if(counter == 0){
+			counter = 12;
+		}
+		counter--;
+
+		if(PORTBbits.RB2 == 0){				// ATENÇAO: METER RB2, ISTO É NAO NEGOCIÁVEL
+			resetCoreTimer();
+			while(readCoreTimer() < 8695652);	// 2.3 Hz, logo: 20 000 000 / 2.3 = 8695652
+		}else{
+			resetCoreTimer();
+			while(readCoreTimer() < 3636363);	// 5.5 Hz, logo: 20 000 000 / 2.3 = 8695652 
+		}				
+	}
+
+	return 0;
+}
