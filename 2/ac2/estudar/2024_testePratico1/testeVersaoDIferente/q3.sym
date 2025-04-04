@@ -1,0 +1,18 @@
+GAS LISTING q3.s 			page 1
+
+
+DEFINED SYMBOLS
+                q3.s:1      *ABS*:000000000000bf88 BASE
+                q3.s:2      *ABS*:0000000000006100 TRISE
+                q3.s:3      *ABS*:0000000000006120 LATE
+                q3.s:4      *ABS*:0000000000000003 putChar
+                q3.s:5      *ABS*:0000000000000006 printInt
+                q3.s:6      *ABS*:000000000000000c resetCoreTimer
+                q3.s:7      *ABS*:000000000000000b readCoreTimer
+                q3.s:13     .text:0000000000000000 main
+                q3.s:26     .text:0000000000000020 while
+                q3.s:44     .text:0000000000000058 if
+                q3.s:48     .text:0000000000000068 endif
+                q3.s:52     .text:0000000000000070 read
+
+NO UNDEFINED SYMBOLS
