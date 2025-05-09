@@ -13,26 +13,26 @@ int main(void)
     // Configure Timers T1 and T3 with interrupts enabled)
 
     // Configure Timer T1 (5 Hz with interrupts disabled)
-    T1CONbits.TCKPS = 2;    // 1:64 prescaler 
+    T1CONbits.TCKPS = 6;    // 1:64 prescaler 
     PR1 = 62499;
-    TMR1 = 0;               // Clear timer T2 count register
-    T1CONbits.TON = 1;      // Enable timer T2 (must be the last command of the timer configuration sequence)
+    TMR1 = 0;               // Clear timer T1 count register
+    T1CONbits.TON = 1;      // Enable timer T1 (must be the last command of the timer configuration sequence)
 
-    // Configure Timer T3 with interrupts enabled 
+    // Configure Timer T1 with interrupts enabled 
     IPC1bits.T1IP = 2; // Interrupt priority (must be in range [1..6]) 
-    IEC0bits.T1IE = 1; // Enable timer T2 interrupts 
-    IFS0bits.T1IF = 0; // Reset timer T2 interrupt flag
+    IEC0bits.T1IE = 1; // Enable timer T1 interrupts 
+    IFS0bits.T1IF = 0; // Reset timer T1 interrupt flag
 
     // Configure Timer T3 (25 Hz with interrupts disabled)
     T3CONbits.TCKPS = 4;    // 1:16 prescaler
     PR3 = 49999;
-    TMR3 = 0;               // Clear timer T2 count register
-    T3CONbits.TON = 1;      // Enable timer T2 (must be the last command of the timer configuration sequence)
+    TMR3 = 0;               // Clear timer T3 count register
+    T3CONbits.TON = 1;      // Enable timer T3 (must be the last command of the timer configuration sequence)
 
     // Configure Timer T3 with interrupts enabled 
     IPC3bits.T3IP = 2; // Interrupt priority (must be in range [1..6]) 
-    IEC0bits.T3IE = 1; // Enable timer T2 interrupts 
-    IFS0bits.T3IF = 0; // Reset timer T2 interrupt flag
+    IEC0bits.T3IE = 1; // Enable timer T3 interrupts 
+    IFS0bits.T3IF = 0; // Reset timer T3 interrupt flag
 
     // Reset T1IF and T3IF flags
     IFS0bits.T1IF = 0;  // Reset T1IF flag
