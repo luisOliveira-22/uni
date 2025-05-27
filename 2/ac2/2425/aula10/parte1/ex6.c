@@ -2,10 +2,11 @@
 
 void putc(char byte);
 void delay(int ms);
+char getc(void);
 
 int main(void)
 { 
-    // Configure UART2: 
+    // Configure UART2 (115200,N,8,1):
     // 1 - Configure BaudRate Generator > (20Mhz / 16 * baudrate) - 1
     U2BRG = 10;             // (20000000 / 16 * 115200) - 1 ~= 10
     U2MODEbits.BRGH = 0;    // dividir por 16
@@ -20,9 +21,9 @@ int main(void)
 
     while(1)
     {
-        putc('+');
-        // wait 1 s
-        delay(1000);
+        // Read character using getc()
+        // Send character using putc()
+        putc(getc());
     }
     return 0;
 }
@@ -39,4 +40,12 @@ void delay(int ms)
 {
     resetCoreTimer();
     while(readCoreTimer() < 20000 * ms);
+}
+
+char getc(void) 
+{ 
+    // Wait while URXDA == 0
+    while(U2STAbits.URXDA == 0);
+    // Return U2RXREG
+    return U2RXREG;
 }
