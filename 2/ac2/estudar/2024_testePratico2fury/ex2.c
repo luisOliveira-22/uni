@@ -1,8 +1,8 @@
 #include <detpic32.h>
 
+void delay(unsigned int ms);
 unsigned char toBcd(unsigned char value);
 void sendtodisplay(unsigned char value);
-void delay(unsigned int ms);
 
 volatile unsigned char voltage;
 
@@ -48,38 +48,37 @@ void _int_(12) isr_T3(void){
 }
 
 int main(void){
-
-	T3CONbits.TCKPS = 2; (1 2 4 8 ...)	// 20 * 10^6 / (65536 * 250Hz) = 1,... -> o expoente seguinte é 2
+	
+	T3CONbits.TCKPS = 2;	// (1 2 4 8 ...) -> 20 * 10^6 / 65536 * 250Hz = 1,... -> o expoente seguinte é 2
 	PR3 = 39999;				// 20 * 10^6 / 2 = 10 * 10^6	// 10 * 10^6 / 250Hz = 40000
 	TMR3 = 0;				// copiar
 	T3CONbits.TON = 1; 			// copiar
 
 	IPC3bits.T3IP = 2;			// (guiao 8 > C3 porque é T3)
 	IEC0bits.T3IE = 1;			// 
-	IFS0bits.T3IF = 0;			//
+	IFS0bits.T3IF = 0;			// 
 
 	TRISBbits.TRISB4 = 1;			// copiar (guiao 6)
-	AD1PCFGbits.PCFG4= 0;			// 
- 	AD1CON1bits.SSRC = 7;			// 
- 	AD1CON1bits.CLRASAM = 1;		// 
- 	AD1CON3bits.SAMC = 16;			// 
+	AD1PCFGbits.PCFG4= 0;			// copiar
+ 	AD1CON1bits.SSRC = 7;			// copiar
+ 	AD1CON1bits.CLRASAM = 1;		// copiar
+ 	AD1CON3bits.SAMC = 16;			// copiar
  	AD1CON2bits.SMPI = 2-1;			// N = 2 amostras
  	AD1CHSbits.CH0SA = 4;			// x = 4 (vem do AN4)
- 	AD1CON1bits.ON = 1;			// 
+ 	AD1CON1bits.ON = 1;			// copiar
 
 	EnableInterrupts();
-
 	while(1){
-		AD1CON1bits.ASAM = 1;		// copiar (guiao 6)
-		while(IFS1bits.AD1IF == 0);	// copiar (guiao 6)
+		AD1CON1bits.ASAM = 1;			// copiar (guiao 6)
+		while(IFS1bits.AD1IF == 0);		// copiar (guiao 6)
 		int* p = (int *)(&ADC1BUF0);
 
 		int avg = (p[0] + p[4])/2;
 		voltage = (avg * 66 + 511) / 1023 + 7;
 
-		IFS1bits.AD1IF = 0;		// fim da parte de cima guiao6
+		IFS1bits.AD1IF = 0;
 		delay(200);
 	}
-
+	
 	return 0;
 }
