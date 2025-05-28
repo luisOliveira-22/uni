@@ -10,7 +10,7 @@ int main(void)
     TMR1 = 0;               // Clear timer T1 count register
     T1CONbits.TON = 1;      // Enable timer T1 (must be the last command of the timer configuration sequence)
 
-    // Configure Timer T3 with interrupts enabled 
+    // Configure Timer T1 with interrupts enabled 
     IPC1bits.T1IP = 2; // Interrupt priority (must be in range [1..6]) 
     IEC0bits.T1IE = 1; // Enable timer T1 interrupts 
     IFS0bits.T1IF = 0; // Reset timer T1 interrupt flag
