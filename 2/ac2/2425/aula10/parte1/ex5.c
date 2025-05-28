@@ -24,7 +24,7 @@ int main(void)
     U2MODEbits.BRGH = 0;    // divide by 16
     // 2 – Configure number of data bits, parity and number of stop bits --> procurar por parity
     U2MODEbits.PDSEL = 2;   // no parity
-    U2MODEbits.STSEL = 1;   // only 1 stop bit
+    U2MODEbits.STSEL = 1;   // 2 stop bit
     // 3 – Enable the trasmitter and receiver modules (see register U2STA) --> procurar "STA", clicar no link e pesquisar o transmit e receiver enable bits
     U2STAbits.UTXEN = 1;    // Enable the trasmitter
     U2STAbits.URXEN = 1;    // Enable receiver modules
