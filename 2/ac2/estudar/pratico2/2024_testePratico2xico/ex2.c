@@ -49,7 +49,7 @@ void _int_(12) isr_T3(void){
 
 int main(void){
 	
-	T3CONbits.TCKPS = 2;	// (1 2 4 8 ...) -> 20 * 10^6 / 65536 * 250Hz = 1,... -> o expoente seguinte é 2
+	T3CONbits.TCKPS = 1;	// (1 2 4 8 ...) -> 20 * 10^6 / 65536 * 250Hz = 1,... -> o expoente seguinte é 2
 	PR3 = 39999;				// 20 * 10^6 / 2 = 10 * 10^6	// 10 * 10^6 / 250Hz = 40000
 	TMR3 = 0;				// copiar
 	T3CONbits.TON = 1; 			// copiar
