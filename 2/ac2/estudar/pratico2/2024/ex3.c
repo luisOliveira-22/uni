@@ -8,9 +8,9 @@ int main(void)
     // config UART
     // (guião 10)
     U2BRG = 129;            // (FÓRMULA) (20Mhz / 16 * baudrate) - 1
-    U2MODEbits.BRGH = 0;
-    U2MODEbits.PDSEL = 2;
-    U2MODEbits.STSEL = 1;
+    U2MODEbits.BRGH = 0;    // dividir por 16
+    U2MODEbits.PDSEL = 2;   // Odd parity (se fosse N => PDSEL = 0)
+    U2MODEbits.STSEL = 1;   // 2 stop bits (se for 1 stop bit => STSEL = 0)
     U2STAbits.UTXEN = 1;
     U2STAbits.URXEN = 1;
     U2MODEbits.ON = 1;
@@ -25,11 +25,14 @@ int main(void)
     LATEbits.LATE7 = 0;
 
     EnableInterrupts();
+
     while(1);
+    
     return 0;
 }
 
-void _int_(32) UART(void){
+void _int_(32) UART(void)
+{
     if(IFS1bits.U2RXIF == 1)
 	{
 		int value = PORTB & 0x000F;
@@ -51,7 +54,8 @@ void _int_(32) UART(void){
 
 void putstr(char *str)
 {
-    while(*str){
+    while(*str)
+    {
         putc(*str++);
     }
 }

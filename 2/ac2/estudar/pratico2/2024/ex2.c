@@ -6,7 +6,7 @@ void delay(unsigned int ms);
 
 volatile unsigned char voltage;
 
-int main(int argc, char const *argv[])
+int main(void)
 {
     // config ADC (guião 6)
     TRISBbits.TRISB4 = 1;       // RBx digital output disconnected
@@ -35,6 +35,10 @@ int main(int argc, char const *argv[])
     IPC3bits.T3IP = 2;
 	IEC0bits.T3IE = 1;
 	IFS0bits.T3IF = 0;
+
+    // config display ports
+    TRISD = (TRISD & 0x0000) | 0xFF9F;
+    TRISB = (TRISB & 0x0000) | 0x80FF;
 
     EnableInterrupts();
 
@@ -75,9 +79,6 @@ char tobcd(char val)
 
 // fornecida pelo enunciado
 void send2displays(unsigned char value) {
-
-    TRISD = (TRISD & 0x0000) | 0xFF9F;
-    TRISB = (TRISB & 0x0000) | 0x80FF; 
 
     static const char disp7Scodes[] = {
         0x3F, 0x06, 0x5B, 0x4F,
