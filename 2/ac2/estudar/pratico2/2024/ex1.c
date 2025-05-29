@@ -10,7 +10,7 @@ int main(void)
     TMR3 = 0;
     T3CONbits.TON = 1;
     OC4CONbits.OCM = 6;
-    OC4CONbits.OCTSEL = 0;
+    OC4CONbits.OCTSEL = 1;  // (timer3) OCTSEL = 1, (timer2) OCTSEL = 0
     OC4RS = 19231;
     OC4CONbits.ON = 1;
 

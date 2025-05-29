@@ -10,7 +10,7 @@ int main(void)
     // config UART
     U2BRG = 519;            // (20*10⁶ / 16 * baudrate) - 1 = 519
     U2MODEbits.BRGH = 0;    // dividir por 16
-    U2MODEbits.PDSEL = 0;   // even parity
+    U2MODEbits.PDSEL = 1;   // N (E) O
     U2MODEbits.STSEL = 1;   // 2 stop bits
     U2STAbits.UTXEN = 1;
     U2STAbits.URXEN = 1;
@@ -65,5 +65,5 @@ void putstr(char *str)
 void putc(char byte)
 {
     while(U2STAbits.UTXBF == 1);
-    U2RXREG = byte;
+    U2TXREG = byte;
 }
