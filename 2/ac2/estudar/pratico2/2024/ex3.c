@@ -9,7 +9,7 @@ int main(void)
     // (guião 10)
     U2BRG = 129;            // (FÓRMULA) (20Mhz / 16 * baudrate) - 1
     U2MODEbits.BRGH = 0;    // dividir por 16
-    U2MODEbits.PDSEL = 2;   // Odd parity (se fosse N => PDSEL = 0)
+    U2MODEbits.PDSEL = 2;   // Odd parity (se fosse N => PDSEL = 0) (se fosse E => PDSEL = 1)
     U2MODEbits.STSEL = 1;   // 2 stop bits (se for 1 stop bit => STSEL = 0)
     U2STAbits.UTXEN = 1;
     U2STAbits.URXEN = 1;

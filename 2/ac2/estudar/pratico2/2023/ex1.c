@@ -10,7 +10,7 @@ int main(void)
     T3CONbits.TON = 1;      // Enable timer T2 (must be the last command of the 
                             //  timer configuration sequence) 
     OC2CONbits.OCM = 6;     // PWM mode on OCx; fault pin disabled 
-    OC2CONbits.OCTSEL = 0;  // Use timer T2 as the time base for PWM generation 
+    OC2CONbits.OCTSEL = 1;  // Use timer T3 as the time base for PWM generation 
     OC2RS = 41666 * 0.75;   // Ton constant 
     OC2CONbits.ON = 1;      // Enable OC1 module
 
