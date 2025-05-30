@@ -34,11 +34,11 @@ int main(void)
 void _int_(32) UART(void)
 {
     if(IFS1bits.U2RXIF == 1)
-	{
-		int value = PORTB & 0x000F;
+    {
+        int value = PORTB & 0x000F;
         char c = U2RXREG;
-        putstr("\n");
         putc(c);
+        putstr("\n");
         if(c == 'D')
         {
             int dezenas = value / 10;
@@ -46,10 +46,11 @@ void _int_(32) UART(void)
             putstr("DSD=");
             putc(dezenas + '0');
             putc(unidades + '0');
+            putstr("\n");
         }
         LATEbits.LATE7 = !LATEbits.LATE7;
-	}
-	IFS1bits.U2RXIF = 0;
+        IFS1bits.U2RXIF = 0;
+    }
 }
 
 void putstr(char *str)

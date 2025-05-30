@@ -26,9 +26,8 @@ int main(void)
         {
             OC2RS = 41666 * 0.55;
         }
-        delay(0.36);
+        delay(360000);
     }
-    
 
     return 0;
 }

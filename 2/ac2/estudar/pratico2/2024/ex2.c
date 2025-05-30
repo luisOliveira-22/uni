@@ -29,16 +29,16 @@ int main(void)
 
     // config Timer 3 (guião 8)
     T3CONbits.TCKPS = 1;        // 20*10⁶ / (65536 * 250) = 1 -> 2
-	PR3 = 39999;			    // 20*10⁶ / (2 * 250) - 1  = 39999
-	TMR3 = 0;
-	T3CONbits.TON = 1;
+    PR3 = 39999;			    // 20*10⁶ / (2 * 250) - 1  = 39999
+    TMR3 = 0;
+    T3CONbits.TON = 1;
     IPC3bits.T3IP = 2;
-	IEC0bits.T3IE = 1;
-	IFS0bits.T3IF = 0;
+    IEC0bits.T3IE = 1;
+    IFS0bits.T3IF = 0;
 
     // config display ports
-    TRISD = (TRISD & 0x0000) | 0xFF9F;
-    TRISB = (TRISB & 0x0000) | 0x80FF;
+    TRISD = TRISD & 0xFF9F;
+    TRISB = TRISB & 0x80FF;
 
     EnableInterrupts();
 

@@ -36,6 +36,8 @@ void _int_(32) UART(void)
     if(IFS1bits.U2RXIF == 1)
     {
         char c = U2RXREG;
+        putc(c);
+        putstr("\n");
         if(c == 'F')
         {
             count++;
@@ -47,11 +49,11 @@ void _int_(32) UART(void)
         else if(c == 'C')
         {
             count = 0;
-            putstr("\nVALOR MINIMO\n");
+            putstr("VALOR MINIMO\n");
         }
+        LATE = (LATE & 0xFFF0) | count;
+        IFS1bits.U2RXIF = 0;
     }
-    LATE = (LATE & 0xFFF0) | count;
-    IFS1bits.U2RXIF = 0;
 }
 
 void putstr(char *str)

@@ -1,6 +1,7 @@
 #include <detpic32.h>
 
 void delay(unsigned int ms);
+char tobcd(char val);
 void send2displays(unsigned char value);
 
 volatile unsigned char voltage;
@@ -24,8 +25,8 @@ int main(void)
     IEC0bits.T3IE = 1;
     IFS0bits.T3IF = 0;
 
-    TRISD = (TRISD & 0x0000) | 0xFF9F;
-    TRISB = (TRISB & 0x0000) | 0x80FF;
+    TRISD = TRISD & 0xFF9F;
+    TRISB = TRISB & 0x80FF;
 
     EnableInterrupts();
 
@@ -47,7 +48,7 @@ int main(void)
 
 void _int_(12) isr_T3(void)
 {
-    send2displays(voltage);
+    send2displays(tobcd(voltage));
     IFS0bits.T3IF = 0;
 }
 
@@ -55,6 +56,11 @@ void delay(unsigned int ms)
 {
     resetCoreTimer();
     while(readCoreTimer() < 20000 * ms);
+}
+
+char tobcd(char val)
+{
+    return (val / 10 << 4) | val % 10;
 }
 
 void send2displays(unsigned char value) {
