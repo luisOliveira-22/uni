@@ -1,0 +1,938 @@
+PRIOR NOTICE: This is a quick compilation of solutions developed in TP or P classes for exercices from the TP Guide (from previous three years). Some of them may be incomplete. In some cases, I included alternative solutions because I didn't have time to compare and check which one was more complete/correct. 
+
+=============================================================================
+
+Está a ser desenvolvido um robô para pesca submarina, o Nautilus, pedindo-se a sua colaboração no desenvolvimento do módulo de controlo. Este robô transporta um máximo de 10 arpões e um depósito com capacidade para 20 peixes. Quando sente um peixe em frente lança imediatamente um arpão (acção Disparar ). Se o arpão atingir um peixe, o robô guarda o peixe no depósito (acção Agarrar ), podendo neste caso recuperar o arpão. Caso contrário, o arpão perde-se. Quando perder todos os arpões, o Nautilus pode reabastecer-se (acção Reabastecer ), ficando novamente com 10 arpões. Quando o depósito de peixes estiver cheio, estes devem ser descarregados (acção Descarregar ), ficando o depósito novamente vazio. Quando não tem mais nada para fazer, limita-se a vaguear (acção Vaguear ).
+
+(a) Identifique as variáveis de estado, se necessárias.
+
+n_arpoes
+n_peixes
+
+
+(b) Identifique e caracterize um conjunto de predicados que possam ser usados para descrever situações em que se encontre o Nautilus.
+
+PeixeEmFrente
+PeixeAtingido
+
+(c) Especifique o conjunto de regras situação-acção que regem o comportamento do Nautilus. Pode fazê-lo na forma de uma tabela com as serguintes colunas:
+• Situação - uma conjunção de condições em lógica de primeira ordem
+• Actualização - actualização das variáveis de estado, caso existam
+• Acção - acção a executar pelo agente na situação indicada
+
+Situação: PeixeEmFrente & n_arpoes>0 & n_peixes<20 & ~PeixeAtingido
+Actualização: n_arpoes--
+Acção: Disparar
+
+Situação: n_arpoes==0 & ~PeixeAtingido
+Actualização: n_arpoes=10
+Acção: Reabastecer
+
+Situação: PeixeAtingido
+Actualização: n_peixes++, n_arpoes++
+Acção: Agarrar
+
+Situação: n_peixes==20
+Actualização: n_peixes=0
+Acção: Descarregar
+Situação: ~PeixeEmFrente & ~PeixeAtingido & n_arpoes>0 & n_peixes<20
+Actualização:
+Acção: Vaguear
+
+
+---------------------------------------------------------------
+
+Consider the blocks world with n blocks represented by the constants (B1, B2, . . . , Bn),
+the On(x, y) predicate, that indicates that the x block is on top of the y object, and the
+Clear(x) predicate, that indicates that block x has no blocks on top of it. 
+
+Indicate the minimum number of blocks for each of the following formulas to be true:
+
+(a) ¬Clear(B1) ∧ ¬Clear(B2) ∧ ∃x(On(B3, x) ∧ x != Floor)
+
+      B3
+      B2
+   ___B1____
+
+      B3
+      B1
+    __B2__
+
+Three blocks are enough.
+
+(b) Clear(B1) ⇒ Clear(B2)
+
+~Clear(B1) v Clear(B2)
+
+
+      B2
+   ___B1____       ___B1___B2___
+
+Two blocks are enough.
+---------------------------------------------------------------
+
+
+Q = quantificador universal
+E = quantificador existencial
+
+10. Consider a domain composed of animals, species, and time ranges. 
+Knowledge in this domain can be described by the following predicates:
+• Animal(a): a is an animal
+• Species(a,e): animal a is of species e
+• Live(a,t): animal a is alive in the t time range
+• Extinct(e,t): species e is extinct in the t time range
+• Parent(p,a): animal p is parent of animal a
+
+(a) Represent the following sentences in first order logic:
+- Any animal has a parent
+  Qa A(a) => Ep P(p,a)
+
+- Any animal belongs to a species
+  Qa A(a) => Ee S(a,e)
+
+- Only animals belong to species
+  Qa Qe S(a,e) => A(a)
+  == Qa Qe ~S(a,e) v A(a)
+
+  Qx ~A(x) => ~Ee S(x,e)
+  == Qx A(x) v ~Ee S(x,e)
+  == Qx ~Ee S(x,e) v A(x)
+  == Qx Qe ~S(x,e) v A(x)
+
+- If p is the parent of a and a belongs to a species e, then p also belongs to e.
+  Qp Qe Qa (P(p,a) & S(a,e)) => S(p,e)
+ 
+
+- A species e is extinct in the time range t if no animal of this species 
+  is alive in this range
+  Qt Qe (Qa (S(a,e) => ~L(a,t))) => Ext(e,t)
+
+
+  Qt Qe ~(Ea S(a,e) & L(a,t)) => Ext(e,t)
+  == Qt Qe (Qa ~S(a,e) v ~L(a,t))) => Ext(e,t)
+  == Qt Qe (Qa S(a,e) => ~L(a,t))) => Ext(e,t)
+
+- There were no live mammoths in 1918
+  Qm S(m,Mammoth) => ~L(m,1918)
+   == Qm ~S(m,Mammoth) v ~Live(m,1918)
+
+  ~Em S(m,Mammoth) & Live(m,1918)
+   == Qm ~S(m,Mammoth) v ~Live(m,1918)
+
+(b) Demonstrate that mammoths were extinct in 1918 from the formulas you wrote.
+
+
+  Qt Qe ~(Ea S(a,e) & L(a,t)) => Ext(e,t)
+  For t=1918 and e=Mammoth:
+     ~(Ea S(a,Mammoth) & L(a,1918)) => Ext(Mamooth,1918)      [1]
+
+  ~Em S(m,Mammoth) & Live(m,1918)                             [2]
+
+
+  From [1] and [2]:
+      Ext(Mammoth,1918) using Modus Ponens: { A, A=>B } |-- B
+
+
+
+
+
+Qualquer animal tem um progenitor
+Qa A(a) => Ep P(p,a)
+
+Qualquer animal pertence a uma espécie
+Qa A(a) => Ee E(a,e)
+
+Apenas os animais pertencem a espécies
+1ª alternativa: Qa ~A(a) => ~Ee E(a,e) = Qa A(a) v Qe ~E(a,e)
+2ª alternativa: ~Ex ~A(x) & Ee E(x,e) == Qx A(x) v ~Ee E(x,e) == Qx A(x) v Qe ~E(x,e) 
+= Qx Qe E(x,e) => A(x)
+
+Se p é o progenitor de a e a pertence a uma espécie e, então p
+também pertence a e
+Qp Qe (Ea P(p,a) & E(a,e)) => E(p,e)
+
+Uma espécie e está extinta no intervalo t se nenhum animal dessa espécie
+está vivo nesse intervalo
+
+Qe Qt (~Ea (E(a,e) & V(a,t))) => Ex(e,t)
+Qe Qt (Qa ~E(a,e) v ~V(a,t))) => Ex(e,t)
+
+Não existiam mamutes vivos no ano de 1918
+Qm E(m,M) => ~V(m,1918) = Qm ~E(m,M) v ~V(m,1918)
+~Em E(m,M) & V(m,1918) = Qm ~E(m,M) v ~V(m,1918)
+
+Qe (Qa ~E(a,e) v ~V(a,1918)) => Ex(e,1918)
+(Qa ~E(a,M) v ~V(a,1918)) => Ex(M,1918)
+
+Ex(M,1918) M.P. (duas fórmulas anteriores)
+
+
+---------------------------------------------------------------
+
+Considere a rede de Bayes identificada pela seguinte atribuição de probabilidades: 
+p(a) = 0.2, p(b|a) = 0.3, p(b|¬a) = 0.2, p(c|b) = 0.2, p(c|¬b) = 0.9, 
+p(d|b) = 0.1, p(d|¬b) = 0.2.
+Calcule a probabilidade conjunta p(a ∧ b ∧ ¬c ∧ ¬d).
+
+     a
+     |
+     b
+    / \
+   c   d
+
+p(a ∧ b ∧ ¬c ∧ ¬d) 
+= p(a) * p(b|a) * p(~c|b) * p(~d|b) 
+= 0.2 * 0.3 * (1-0.2) * (1-0.1)
+= 0.2 * 0.3 * 0.8 * 0.9
+= 0.06 * 0.72
+= 0.04
+
+---------------------------------------------------------------
+
+Ex. IV.1.b)
+
+Desenhe a árvore de pesquisa gerada pela estratégia A* tomando com estado inicial
+o estado F . Indique o valor da função de avaliação em cada nó e numere os nós 
+pela ordem em que são criados. Considere que a pesquisa em árvore se faz sem 
+repetição de estados. Em caso de empate no valor da função de avaliação, o nó 
+escolhido para expansão será o que vem antes na ordem alfabética dos estados. 
+Use os valores originais da heurı́stica.
+
+f(n) = g(n) + h(n)
+
+fila : [1]
+       [2,4,3]
+       [5,4,6,7,3]
+       [4,8,6,7,3]
+       [8,6,11,7,3,9,10]
+
+(1) F, 10
+    (2) C, 6
+        (5) B, 6
+            (8) A, 8    <--- solucao
+        (6) D, 9
+        (7) E, 11
+    (3) G, 11
+    (4) H, 6
+        (9) E, 16
+       (10) G, 16
+       (11) I, 9
+
+N = 11
+d = 3
+
+FRM = (N-1)/X = (11-1)/4 = 2.5
+
+FRE = B
+
+(B^d+1 - 1)/(B-1) = N
+(B^4 - 1)/(B-1) = 11
+
+B   | N
+---------
+2   | 15
+1.5 |  8        1.5^4 = 2.25^2 = 2*2.5 = 5
+      
+B=1.75
+
+---------------------------------------------------------------
+
+IV.6
+Considere o seguinte puzzle Su Doku em que cada linha, coluna e quadrado de 3 por 3
+deve ser preenchido com os números de 1 a 9 e sem repetições. Apresente uma abordagem
+à resolução deste puzzle utilizando Pesquisa por Propagação de Restrições. Indique quais
+as variáveis, o seu domı́nio e as restrições a considerar.
+
+Variaveis?
+- cada posicao da matriz é uma variavel: (i,j) = i=1..9, j=1..9
+
+Dominios?
+- todas as variaveis têm o mesmo domínio: dominio[i,j]={ 1,...,9 }
+
+Restricoes?
+- todas as variáveis com valor pré-definido têm
+  uma restrição unŕia associada, retringindo a apenas esse valor
+
+- uma coluna/linha não pode ter numeros repetidos
+
+  Qualquer linha i, qq cols j1, j2: val[i,j1]!=val[i,j2]
+
+  r(v1,x1,v2,x2): x1!=x2
+
+Grafo de restricoes?
+
+  { ((i,j1),(i,j2)): r for i in 1..9 for j1 in 1..9 if j1!=j2 }
+
++ { ((i1,j),(i2,j)): r for j in 1..9 for i1 in 1..9 if i1!=i2 }
+
++ { ((i1,j1),(i2,j2)): r for i1, i2, j1, j2 in 1..9 if (i1+2)//3==(i2+2)//3
+                                                       (j1+2)//3==(j2+2)//3 }
+
+
+
+IV.6
+
+Variaveis?
+Lij, i=1..9, j=1..9
+
+Dominios?
+Lij: { 1 .. 9 }
+
+Restricoes binárias?
+
+Qi Qj Qk:
+-- k!=j => val(Lij) != val(Lik)
+-- k!=i => val(Lij) != val(Lkj)
+
+Qi Qj Qm Qn:
+x=(i+2)/3+m
+y=(j+2)/3+n
+-- x!=i & y!=j => val(Lij)!=val(Lxy)
+
+Restricoes unárias
+L32 = 4, etc.
+
+
+
+IV.6
+
+Variáveis?
+- Lij, i: 1..9, j: 1..9
+
+Dominios?
+- Lij: { 1..9 }
+
+Restricoes?
+
+- unárias?
+  L32=4, ...
+
+- binárias?
+  Qi Qj Qk, k!=j: val(Lij)!=val(Lik)
+  Qj Qi Qk, k!=i: val(Lij)!=val(Lkj)
+  
+  Qi Qj Qm Qn: 
+      i!=m & j!=n &
+      (i+2)/3==(m+2)/3 & (j+2)/3==(n+2)/3 => val(Lij)!=val(Lmn)
+
+  Arestas = { (Lij,Lmn), para Qi Qj Qm Qn
+                 i!=m & j!=n & (i+2)/3==(m+2)/3 & (j+2)/3==(n+2)/3 }
+
+  r(v1,x1,v2,x2): x1!=x2
+
+- de ordem superior?
+  Não há
+
+
+
+IV.6 (Sodoku)
+
+Variaveis:	V_ij, i=1..9, j=1..9
+
+Dominios: 	V_ij = { 1 .. 9 }
+
+
+Basta esta restrição:
+R: V_ij, x_ij, V_kl, x_kl --> x_ij!=x_kl
+(desde que as arestas consideradas sejam as relevantes)
+
+Arestas: 9*8*9*2 + 9*10 = 1386
+
+         9 variaveis por linha
+         8 variaveis restantes
+         2 sentidos
+         9 linhas
+
+         o mesmo para as colunas
+
+Arestas = { (V_ij,V_il): i=1..9, j=1..9, l=1..9, j!=l }
+        + { (V_ij,V_kj): i=1..9, j=1..9, k=1..9, i!=k }
+        + { (V_ij,V_kl): i=1..9, j=1..9, l=1..9, i!=j, k!=l,
+                         (i-1)/3==(k-1)/3, (j-1)/3==(l-1)/3) }
+
+
+==================================================================
+
+IV.8
+
+In order to solve it through constraint search, formulate the problem of scheduling four
+tasks (A, B, C and D) taking into account the following information:
+• Tasks start at whole hours, from 8h on a certain day, and finish no later than 19h on
+the same day.
+• The duration of the tasks is as follows: A - 1h, B - 2h, C - 3h, D - 4h.
+• The A task must finish before the B and C tasks begin.
+• The D task should start after the B and C tasks finish.
+• Tasks cannot be performed simultaneously.
+
+
+Variables:
+A, B, C, D (start times of the tasks)
+
+Domains:
+A: [8..18]
+B: [8..17]
+C: [8..16]
+D: [8..15]
+
+Constraints:
+
+Duration = { A:1, B:2, C:3, D:4 }
+
+r(v1,x1,v2,x2): x1>=x2+Durarion(v2) or x2>=x1+Duration(v1)    # not simultaneous
+
+.....
+
+
+IV.8
+Com vista à sua resolução através de pesquisa com propagação de restrições, formule o problema de escalonar quatro tarefas (A, B, C e D) tendo em conta as seguintes informações:
+
+• As tarefas começam às horas certas, a partir das 8h de um dia, 
+  terminam o mais tardar às 19h desse mesmo dia.
+• A duração das tarefas é a seguinte: A - 1h, B - 2h, C - 3h, D - 4h.
+• A tarefa A deverá terminar antes das tarefas B e C começarem.
+• A tarefa D deverá começar depois de terminarem as tarefas B e C.
+• As tarefas não podem ser realizadas simultâneamente.
+
+Variaveis e dominios
+A : 8 .. 18
+B : 8 .. 17
+C : 8 .. 16
+D : 8 .. 15
+                       r1_ B _r1
+                      _/   |   \_
+                     A_    |r2 _ D
+                       \   |  /
+                      r1\_ C_/r1
+duracao: { A:1, B:2, C:3, D:4 }
+r1: lambda t1,h1,t2,h2: h1+duracao(t1)<=h2
+r2: lambda t1,h1,t2,h2: h1+duracao(t1)<=h2 ou h2+duracao(t2)<=h1
+
+
+
+
+---------------------------------------------------------------
+
+O robô VG-10 deixado recentemente em Marte pela Agência Espacial Portuguesa (AEP) precisa de planear as suas expedições entre várias estações anteriormente construı́das pela AEP nesse planeta do sistema solar. Para cada estação, o VG-10 sabe quais as estações adjacentes, ou seja, aquelas para as quais se pode deslocar com o equivalente a um depósito de combustı́vel. Além de encher o depósito, o VG-10 pode transportar dois bidões de combustı́vel para recarga.
+
+Os tipos de acções que o VG-10 pode executar são:
+• ir(E1,E2) - ir da estação E1 para a estação adjacente E2 .
+• carregar(E, B, X) - carregar o bidão B da estação E para o espaço X no robô.
+• encher(B, X) - encher o depósito com o combustı́vel do bidão B que está carregado no robô na posição X.
+• descarregar(E, B, X) - descarregar o bidão B do espaço X para a estação E.
+
+Realize os seguintes exercı́cios:
+
+(a) Proponha um conjunto de condições que permitam descrever os estados de planeamento das expedições do VG-10. Explique o seu significado.
+
+Estado(x,estado) - x in { Deposito, B1, B2 .... }, estado in { Cheio, Vazio }
+NoRobo(bidao,posicao) - bidao in { B1, B2, ... }, pos in { Pos1, Pos2 }
+NaEstacao(x,estacao) - x in { VG-10, B1, B2, ... }, estacao in { E1, ... }
+Adjacente(e1,e2) - e1 e e2 sao estacoes
+Livre(p) - p e uma posicao no robo, p in { Pos1, Pos2 }
+
+(b) Especifique os operadores de planeamento necessários para representar as acções do VG-10.
+
+• ir(E1,E2) - ir da estação E1 para a estação adjacente E2 .
+Operador: Ir(e1,e2)
+PC: [ NaEstacao(VG-10,e1),Estado(Deposito,Cheio),Adjacente(e1,e2) ]
+EN: [ NaEstacao(VG-10,e1),Estado(Deposito,Cheio) ]
+EP: [ NaEstacao(VG-10,e2),Estado(Deposito,Vazio) ]
+
+• carregar(E, B, X) - carregar o bidão B da estação E para o espaço X no robô.
+Operador: Carregar(e,b,p)
+PC: [ NaEstacao(b,e), NaEstacao(VG-10,e), Livre(p) ]
+EN: [ NaEstacao(b,e), Livre(p) ]
+EP: [ NoRobo(b,p) ]
+
+• encher(B, X) - encher o depósito com o combustı́vel do bidão B que está carregado no robô na posição X.
+Operador: Encher(b,p)
+PC: [ Estado(Deposito,Vazio), Estado(b,Cheio), NoRobo(b,p) ]
+EN: [ Estado(Deposito,Vazio), Estado(b,Cheio) ]
+EP: [ Estado(Deposito,Cheio), Estado(b,Vazio) ]
+
+• descarregar(E, B, X) - descarregar o bidão B do espaço X para a estação E.
+Operador: Descarregar(e,b,p)
+PC: [ NoRobo(b,p), NaEstacao(VG-10,e) ]
+EN: [ NoRobo(b,pt) ]
+EP: [ Livre(p),NaEstacao(b,e) ]
+
+(c) Se pretender que um planeador das missões do VG-10, baseado na estratégia A∗ , encontre uma solução óptima quando ela existe, que função de avaliação/estimação de custos sugere que seja utilizada? Justifique.
+
+(d) Considere agora que uma estação adjacente é uma estação para a qual existe uma ligação (trilho ou caminho) que o robô pode seguir. As distâncias entre todos os pares de estações adjacentes são conhecidas. Além disso, sabe-se que distância o VG-10 pode percorrer com o combustı́vel de um depósito. Que adapações à representação das acções seria necessário introduzir para levar em consideração estas restrições. Ilustre para o caso do operador ir(E1, E2). Assuma que o combustı́vel do depósito dá para chegar a qualquer estação adjacente, embora possa sobrar.
+
+Operador: Ir(e1,e2)
+PC: [ NaEstacao(VG-10,e1),Estado(Deposito,Cheio),Adjacente(e1,e2) ]
+EN: [ NaEstacao(VG-10,e1),Estado(Deposito,Cheio) ]
+EP: [ NaEstacao(VG-10,e2),Estado(Deposito,Vazio) ]
+
+
+---------------------------------------------------------------
+
+Um macaco está numa sala. Na mesma sala, mas fora do alcance do macaco, está também um cacho de bananas. Se o macaco subir para cima de uma caixa, conseguirá alcançar as bananas. Inicialmente, o macaco está na posição A, as bananas na posição B e a caixa na posição C. As acções que o macaco pode executar são: deslocar-se de uma posição para outra; empurrar um dado objecto de uma posição para outra; subir para cima de um dado objecto; agarrar o cacho de bananas.
+
+(a) Identifique um conjunto de condições com as quais seja possı́vel descrever os vários estados do mundo neste problema.
+
+Posicao(x,p) -- x in [M, Cx, Bn], p in [A,B,C], M=macaco, Cx=caixa, Bn=bananas
+EmCima(x,y) -- x in [M], y in [Cx]
+NoChao(x) -- x in [M,Cx]
+Pendurado(x) -- x in [Bn]
+NaMao(x,y) -- x in [Bn], y in [M]
+
+(b) Descreva o estado inicial do problema usando as condições que propôs.
+
+[ Posicao(M,A), Posicao(Bn,B), Posicao(Cx,C), NoChao(M), NoChao(Cx), Pendurado(Bn) ]
+
+(c) Identifique e descreva as acções possı́veis de acordo com o formato STRIPS.
+( As acções que o macaco pode executar são: deslocar-se de uma posição para outra; empurrar um dado objecto de uma posição para outra; subir para cima de um dado objecto; agarrar o cacho de bananas.)
+
+Operador: Deslocar(p1,p2):
+PC: [ Posicao(M,p1), p1!=p2, NoChao(M) ]
+EN: [ Posicao(M,p1) ]
+EP: [ Posicao(M,p2) ]
+
+Operador: Empurrar(p1,p2):
+PC: [ Posicao(M,p1), p1!=p2, NoChao(M), NoChao(Cx), Posicao(Cx,p1) ]
+EN: [ Posicao(M,p1), Posicao(Cx,p1) ]
+EP: [ Posicao(M,p2), Posicao(Cx,p2) ]
+
+Operador: Subir(p):
+PC: [ Posicao(M,p), Posicao(Cx,p), NoChao(M), NoChao(Cx) ]
+EN: [ NoChao(M) ]
+EP: [ EmCima(M,Cx) ]
+
+Operador: Agarrar(p)
+PC: [ EmCima(M,Cx), Posicao(M,p), Posicao(Cx,p), Posicao(Bn,p), Pendurado(Bn) ]
+EN: [ Pendurado(Bn) ]
+EP: [ NaMao(Bn,M) ]
+
+(d) Que sequência de acções deverá o macaco executar?
+
+Deslocar(A,C), Empurrar(C,B), Subir(B), Agarrar(B)
+
+(e) Apresente uma estimativa para o tamanho aproximado que a árvore de pesquisa poderá atingir. Justifique.
+
+
+
+
+
+IV.9. Um macaco está numa sala. Na mesma sala, pendurado num cabide e fora do alcance do macaco, está também um cacho de bananas. Se o macaco subir para cima de uma caixa, conseguirá alcançar as bananas. Inicialmente, o macaco está na posição A, as bananas na posição B e a caixa na posição C. As acções que o macaco pode executar são: 
+- deslocar-se de uma posição para outra; 
+- empurrar um dado objecto de uma posição para outra; 
+- subir para cima de um dado objecto; 
+- agarrar o cacho de bananas.
+
+(a) Identifique um conjunto de condições [=predicados] com as quais seja possı́vel descrever os vários estados do mundo neste problema.
+- EmCima -- M (macaco) está em cima de Cx (caixa)
+- NaMao -- Ban (bananas) na mão de M
+- Posicao(x,p) -- objecto x está na posição p; x: { M, Ban, Cx }, p: {A,B,C}
+- Pendurado -- Ban pendurado
+- NoChao -- M no chao
+
+(b) Descreva o estado inicial do problema usando as condições que propôs.
+
+Posicao(M,A), Posicao(Ban,B), Posicao(Cx,C), NoChao, Pendurado
+
+(c) Identifique e descreva as acções possı́veis de acordo com o formato STRIPS.
+- deslocar-se de uma posição para outra; 
+Deslocar(p1,p2)
+PC: Posicao(M,p1), NoChao
+EN: Posicao(M,p1)
+EP: Posicao(M,p2)
+
+- empurrar um dado objecto de uma posição para outra; 
+Empurrar(p1,p2)
+PC: Posicao(M,p1), NoChao, Posicao(Cx,p1)
+EN: Posicao(M,p1), Posicao(Cx,p1)
+EP: Posicao(M,p2), Posicao(Cx,p2)
+
+- subir para cima de um dado objecto; 
+Subir(p)
+PC: Posicao(M,p), NoChao, Posicao(Cx,p)
+EN: NoChao
+EP: EmCima
+
+- agarrar o cacho de bananas.
+Agarrar(p)
+PC: Posicao(M,p), EmCima, Posicao(Cx,p), Posicao(Ban,p), Pendurado
+EN: Pendurado
+EP: NaMao
+
+(d) Que sequência de acções deverá o macaco executar?
+
+Deslocar(A,C), Empurrar(C,B), Subir(B), Agarrar(B)
+
+(e) Apresente uma estimativa para o tamanho aproximado que a árvore de pesquisa poderá atingir. Justifique.
+
+B = nº médio de acções aplicáveis por estado, considerando 
+    uma amostra de estados
+
+N = (B^(d+1)-1)/(B-1)
+
+
+E0 = [Posicao(M,A), Posicao(Ban,B), Posicao(Cx,C), NoChao, Pendurado]
+- Deslocar(A,B)
+  E1 = [Posicao(M,B), Posicao(Ban,B), Posicao(Cx,C), NoChao, Pendurado]
+  - Deslocar(B,C)
+  - Deslocar(B,A)
+- Deslocar(A,C)
+  E2 = [Posicao(M,C), Posicao(Ban,B), Posicao(Cx,C), NoChao, Pendurado]
+  - Subir(C)
+    E3 = [Posicao(M,C), Posicao(Ban,B), Posicao(Cx,C), EmCima, Pendurado]
+    s/ acções aplicáveis
+  - Deslocar(C,B)
+  - Deslocar(C,A)
+  - Empurrar(C,A)
+  - Empurrar(C,B)
+    E4 = [Posicao(M,B), Posicao(Ban,B), Posicao(Cx,B), NoChao, Pendurado]
+    - Subir(B)
+    - Deslocar(B,C)
+    - Deslocar(B,A)
+    - Empurrar(B,C)
+    - Empurrar(B,A)
+
+2 + 2 + 5 + 0 + 5 = 14
+B = 14/5 = 2.8
+
+N = (2.8^(4+1)-1)/(2.8-1)          (2.5*3)^2 * 3 = 67 * 3 = 200
+  = 200/1.8
+  = 115  (--> 95)
+
+
+=/=
+
+9. Um macaco está numa sala. Na mesma sala, pendurado num cabide e fora do alcance do macaco, está também um cacho de bananas. Se o macaco subir para cima de uma caixa, conseguirá alcançar as bananas. Inicialmente, o macaco está na posição A, as bananas na posição B e a caixa na posição C. As acções que o macaco pode executar são: 
+- deslocar-se de uma posição para outra; 
+- empurrar um dado objecto de uma posição para outra; 
+- subir para cima de um dado objecto; 
+- agarrar o cacho de bananas.
+
+(a) Identifique um conjunto de condições [=predicados] com as quais seja possı́vel descrever os vários estados do mundo neste problema.
+
+Posicao(o,p) -- o: { M,Cx,Ban }, p: { A,B,C }
+EmCima(obj) -- M em cima de obj; obj: { Cx }
+NoChao -- M no chão
+Pendurado -- Ban penduradas
+NaMao -- Ban na mão do macaco
+
+(b) Descreva o estado inicial do problema usando as condições que propôs.
+{ Pendurado, NoChao, Posicao(M,A), Posicao(Cx,C), Posicao(Ban,B) }
+
+(c) Identifique e descreva as acções possı́veis de acordo com o formato STRIPS.
+
+- deslocar-se de uma posição para outra; 
+Deslocar(p1,p2)
+PC: NoChao, Posicao(M,p1)
+EN: Posicao(M,p1)
+EP: Posicao(M,p2)
+
+- empurrar um dado objecto de uma posição para outra; 
+Empurrar(p1,p2,obj)
+PC: NoChao, Posicao(M,p1),Posicao(obj,p1)
+EN: Posicao(M,p1), Posicao(M,p1)
+EP: Posicao(M,p2), Posicao(M,p2)
+
+- subir para cima de um dado objecto; 
+Subir(p, obj)
+PC: NoChao, Posicao(M,p),Posicao(obj,p)
+EN: Posicao(M,p),Posicao(obj,p)
+EP: EmCima(obj)
+
+- agarrar o cacho de bananas.
+Agarrar(p)
+PC: EmCima(Cx), Posicao(M,p), Posicao(Ban,p), Pendurado
+EN: Pendurado
+EP: NaMao
+
+
+(d) Que sequência de acções deverá o macaco executar?
+
+Deslocar(A,C), Empurrar(C,B,Cx), Subir(B,Cx), Agarrar(B)
+
+(e) Apresente uma estimativa para o tamanho aproximado que a árvore de pesquisa poderá atingir. Justifique.
+
+N = (B^(d+1)-1)/(B-1)
+
+( Estimar B com base no nº de acções aplicáveis numa amostra de estados ... )
+
+IV.9
+
+Um macaco está numa sala. Na mesma sala, pendurado num cabide e fora do alcance do macaco, está também um cacho de bananas. Se o macaco subir para cima de uma caixa, conseguirá alcançar as bananas. Inicialmente, o macaco está na posição A, as bananas na posição B e a caixa na posição C. As acções que o macaco pode executar são: deslocar-se de uma posição para outra; empurrar um dado objecto de uma posição para outra; subir para cima de um dado objecto; agarrar o cacho de bananas.
+
+(a) Identifique um conjunto de condições com as quais seja possı́vel descrever os vários estados do mundo neste problema.
+
+NaMao(x,y), x = M,..., y=Ban,....
+EmCima(x,y), x = M,..., y=Cx,....
+Pendurado(x), x = Ban, ....
+NoChao(x), x=M,Cx,...
+Posicao(x,p), x=M,Cx,Ban,..., p=A,B,C,...
+
+(b) Descreva o estado inicial do problema usando as condições que propôs.
+
+NoChao(M), Pendurado(Ban), Posicao(M,A), Posicao(Ban,B), Posicao(Cx,C)
+
+(c) Identifique e descreva as acções possı́veis de acordo com o formato STRIPS.
+
+
+Empurrar(x,y,p1,p2)
+PC: Posicao(x,p1), Posicao(y,p1), NoChao(x), NoChao(y)
+EN: Posicao(x,p1), Posicao(y,p1)
+EP: Posicao(x,p2), Posicao(y,p2)
+
+Subir(x,y,p)
+PC: Posicao(x,p), Posicao(y,p), NoChao(x), NoChao(y)
+EN: NoChao(x)
+EP: EmCima(x,y)
+
+Agarrar(x,y,z,p)
+PC: Posicao(x,p), Posicao(y,p), Posicao(z,p), EmCima(x,y), Pendurado(z)
+EN: Pendurado(z)
+EP: NaMao(x,z)
+
+Mover(x,p1,p2)
+PC: Posicao(x,p1), NoChao(x)
+EN: Posicao(x,p1)
+EP: Posicao(x,p2)
+
+
+(d) Que sequência de acções deverá o macaco executar?
+
+
+Mover(M,A,C),		| Mover(M,A,B)
+Empurrar(M,Cx,C,B), 	| Mover(M,C,A), Mover(M,C,B), Empurrar(M,Cx,C,A),
+                        | Subir(M,Cx,C)
+Subir(M,Cx,B), 		| Mover(M,B,A), Mover(M,B,C), 
+                        | Empurrar(M,Cx,B,A), Empurrar(M,Cx,B,C), 
+Agarrar(M,Cx,Ban,B)
+
+Factor de ramificação = (2+5+5+1)/4 = 13/4 = 3.25 (estimativa grosseira)
+
+Tamanho da árvore = (R^(d+1)-1)/(R-1) 
+                  = (3.25^5-1)/2.25 
+                  = (3*3.5*3*3.5*3.25-1)/2.25
+                  = (110*3.25-1)/2.25
+                  = 360/2.25
+                  = 160
+
+
+
+(e) Apresente uma estimativa para o tamanho aproximado que a árvore de pesquisa poderá atingir. Justifique.
+
+
+
+---------------------------------------------------------------
+
+
+
+
+
+H(C) = -SUM( p(Ci)*log(p(Ci) )
+     = -p(0)*log(p(0)) - p(1)*log(p(1))
+     = -3/5 * log(3/5) - 2/5 * log(2/5)
+     = -(3/5)*(log(3)-log(5)) - 2/5 * (log(2)-log(5))
+     = -3/5 * log(3) + 3/5 log(5) - 2/5 log(2) + 2/5 log(5)
+     = -3/5 log(3) -2/5 log(2) + log(5)
+     = -3/5 * 1.5 - 2/5 + 2.25
+     = -0.9 - 0.4 + 2.25
+     = 1
+
+H(C|Ajk) = -SUM( p(C|Ajk)log(p(C|Ajk) )
+
+
+H(C|0) = -SUM( p(C|0)log(p(C|0) )
+       = -p(0|0) log(p(0|0) - p(1|0) log(p(1|0) 
+       = -1*0 - 0*log(0)
+       = 0
+
+H(C|1) = -SUM( p(C|1)log(p(C|1) )
+       = -p(0|1) log(p(0|1) - p(1|1) log(p(1|1) 
+       = -0.5*(-1) - 0.5*(-1)
+       = 1
+
+H(C|Aj) = SUM( p(Ajk)*H(C|Ajk) )
+
+H(C|A1) = p(0)*H(C|0) + p(1)*H(C|1) 
+        = 1/5*0 + 4/5*1
+        = 0.8
+
+I(C,Aj) = H(C) - H(C|Aj) = 1-0.8 = 0.2
+
+
+---------------------------------------------------------------
+
+1. Sabe-se que a doença D ocorre em 1/4 de todos os casos. Sabe-se também que o sintoma S
+é observado em 3/4 dos pacientes que sofrem da doença D e em 1/8 da restante população.
+Suponha que se está a iniciar a construção de uma árvore de decisão com o objectivo
+de diagnosticar a referida doença. Temos portanto duas classes, D e ¬D, e S é um dos
+atributos.
+Nas alı́neas seguintes, pode apresentar cálculos aproximados, desde que indique as simpli-
+ficações que efectuou.
+(a) Qual o ganho de informação associado ao atributo S?
+(b) Qual a razão do ganho associada ao atributo S?
+
+
+C = { d, ~d }
+A = { S, ... }
+S = { s, ~s }
+
+
+H(C) = -SUM(p(C_i)*log_2(p(C_i))) 
+
+             H(C) = -p(d)*log_2(p(d))-p(~d)*log_2(p(~d))
+             -------------------------------------------
+
+H(C|A_jk) = -SUM(p(C_i|A_jk)*log_2(p(C_i|A_jk)))
+
+
+             H(C|s) = -p(d|s)*log_2(p(d|s))-p(~d|s)*log_2(p(~d|s))
+                      ----------------------------------------------
+             H(C|~s) = -p(d|~s)*log_2(p(d|~s))-p(~d|~s)*log_2(p(~d|~s))
+                      ----------------------------------------------
+
+H(C|A) = SUM(p(A_jk)*H(C|A_jk)) 
+             H(C|S) = p(s)*H(C|s) + p(~s)*H(C|~s)
+                     ----------------------------
+
+p(d)
+p(d|s)
+p(~d|s)
+p(d|~s)
+p(~d|~s)
+p(s)
+p(~s)
+
+p(d) = 1/4
+p(~d) = 1-p(d) = 3/4
+p(s|d) = 3/4
+p(s|~d) = 1/8
+
+      p(S|C)           p(C)         p(C & S)
+    | s    |  ~s    ||      ||       s    |  ~s
+-----------------   ||      ||   -----------------
+d   | 3/4  |  1/4   ||  1/4 ||      3/16  | 1/16
+-----------------   ||      ||   -----------------
+~d  | 1/8  |  7/8   ||  3/4 ||      3/32  | 21/32
+-----------------   ||      ||   -----------------
+
+P(S)                                9/32  | 23/32
+-------------------------------------------------
+
+p(A & B) = p(A|B)*p(B)
+p(A|B) = P(A & B) / P(B)
+
+
+      p(C|S)
+    ----------
+    | d   |  ~d
+-----------------
+s   | 2/3 | 1/3
+-----------------
+~s  | 2/23| 21/23 
+-----------------
+
+p(d) = 1/4
+p(~d) = 1-p(d) = 3/4
+
+             H(C) = -p(d)*log_2(p(d))-p(~d)*log_2(p(~d))
+             -------------------------------------------
+             H(C) = -(1/4)*log_2(1/4) - (3/4)*log_2(3/4)       log(3) ~=~ (log(4)+log(2))/2 = 1.5
+                  = -0.25*(-2) - 0.75*(-0.5)
+                  = 0.5+0.375
+                  = ~	0.9
+
+             H(C|s) = -p(d|s)*log_2(p(d|s))-p(~d|s)*log_2(p(~d|s))
+                      ----------------------------------------------
+                    = -(2/3)*log(2/3) -(1/3)*log(1/3)
+                    = ....
+  
+             H(C|~s) = -p(d|~s)*log_2(p(d|~s))-p(~d|~s)*log_2(p(~d|~s))
+                      ----------------------------------------------
+                    = -(2/23)*log(2/23) -(21/23)*log(21/23)
+                    = ....
+
+             H(C|S) = p(s)*H(C|s) + p(~s)*H(C|~s)
+                     ----------------------------
+                    = (9/32)*.... + (23/32)*....
+                    =.....
+
+             I(C,S) = H(C)-H(C|S) = ....
+
+--------------------------------------------------------------------------------
+
+
+C = { d, ~d }
+
+A = { S, ... }
+
+S = { s, ~s }
+
+p(d) = 1/4
+p(~d) = 1-p(d) = 3/4
+
+P(s|d) = 3/4
+p(s|~d) = 1/8
+
+P(S|C)
+-------------------
+     C:     d    ~d
+S
+-------------------
+s         3/4    1/8
+~s        1/4    7/8
+
+P(S&C)                
+-------------------
+     C:     d    ~d
+S                        P(S)
+----------------------   ---------
+s         3/16  3/32     9/32
+~s        1/16  21/32    23/32
+
+
+P(C|S) 
+-------------------
+     C:     d    ~d
+S
+----------------------
+s         2/3   1/3
+~s        2/23  21/23
+
+
+H(C) = -SUM_c(p(c)*log_2(p(c))                          approx. log_2(3) = (log_2(4)-log_2(2)) / 2 = 1.5
+     = -(1/4)*log_2(1/4)-(3/4)log_2(3/4)
+     = 0.5-(3/4)*(log_2(3)-log_2(4))
+     = 0.5-(3/4)*(-0.5)
+     = 0.5+3/8
+     = 7/8
+     = 0.875
+
+H(C|s) = -SUM_c(p(c|s)*log_2(p(c|s)))
+       = -P(D|s)*log_2(p(D|s))-P(~D|s)*log_2(p(~D|s))
+       = -(2/3)*log_2(2/3)-(1/3)*log_2(1/3)
+       = -(2/3)*(1-1.5)-(1/3)*(0-1.5)
+       = 1/3 + 1/2
+       = 5/6
+
+H(C|~s) = -SUM_c(p(c|~s)*log_2(p(c|~s)))
+        = -(2/23)*log_2(2/23)-(21/23)*log_2(21/23)      log_2(21/23) approx. = log_2(1) = 0
+        = -(2/23)*(1-4.5)
+        = -(2/23)*(-3.5)
+        = 7/23
+
+H(C|S) = SUM_v(p(v)*H(C|v)
+       = p(s)*H(C|s) + p(~s)*H(C|~s)
+       = (9/32)*(5/6) + (23/32)*(7/23)
+       = 3*5/(32*2) + 7/32
+       = 15/64 + 14/64
+       = 29/64
+
+I(C;S) = H(C) - H(C|S)
+       = 7/8 - 29/64
+       = 56/64 - 29/64
+       = 27/64
+
+H(S) = -SUM(p(v)*log_2(p(v)), em que os "v" são os valores do atributo
+     = -(9/32)*log_2(9/32)-(23/32)*log(23/32)          log_2(9) approx 3
+     = -(9/32)*(3-5)-(23/32)*(-0.5)                    log_2(23/32) approx. = log_2(3/4) approx = 1.5-2
+     = 1/2 + 3/8                                       approx
+		
+R(C;S) = I(C;S)/H(S) = (27/64)/(7/8) = 27/56 approx. = 0.5
