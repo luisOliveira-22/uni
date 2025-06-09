@@ -1,0 +1,790 @@
+Analysis & Synthesis report for Calendario1
+Sat Jun 19 00:23:24 2021
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |MeuCalendario|DispCntrl:DispCntrl|Present_state
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos1
+ 14. Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos2
+ 15. Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos3
+ 16. Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos4
+ 17. Parameter Settings for User Entity Instance: Mux:Mux
+ 18. Parameter Settings for User Entity Instance: Reg:dispDias1
+ 19. Parameter Settings for User Entity Instance: Reg:dispDias0
+ 20. Parameter Settings for User Entity Instance: Reg:dispMes1
+ 21. Parameter Settings for User Entity Instance: Reg:dispMes0
+ 22. Parameter Settings for User Entity Instance: Reg:dispAnos0
+ 23. Parameter Settings for User Entity Instance: Reg:dispAnos1
+ 24. Parameter Settings for User Entity Instance: Reg:dispAnos2
+ 25. Parameter Settings for User Entity Instance: Reg:dispAnos3
+ 26. Parameter Settings for Inferred Entity Instance: BCD:MesesBCD|lpm_divide:Mod0
+ 27. Parameter Settings for Inferred Entity Instance: BCD:DiasBCD|lpm_divide:Div0
+ 28. Parameter Settings for Inferred Entity Instance: BCD:DiasBCD|lpm_divide:Mod0
+ 29. Parameter Settings for Inferred Entity Instance: BCD:MesesBCD|lpm_divide:Div0
+ 30. Port Connectivity Checks: "Counter4Bits:CounterDosAnos4"
+ 31. Port Connectivity Checks: "Counter5Bits:CounterDosMeses"
+ 32. Post-Synthesis Netlist Statistics for Top Partition
+ 33. Elapsed Time Per Partition
+ 34. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Jun 19 00:23:24 2021       ;
+; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                      ; Calendario1                                 ;
+; Top-level Entity Name              ; MeuCalendario                               ;
+; Family                             ; Cyclone IV E                                ;
+; Total logic elements               ; 358                                         ;
+;     Total combinational functions  ; 303                                         ;
+;     Dedicated logic registers      ; 168                                         ;
+; Total registers                    ; 168                                         ;
+; Total pins                         ; 88                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE115F29C7      ;                    ;
+; Top-level entity name                                                      ; MeuCalendario      ; Calendario1        ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone V          ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                              ; Enable             ; Enable             ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                                        ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-6         ;   0.0%      ;
++----------------------------+-------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                   ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                               ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+; Mux.vhd                          ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Mux.vhd                          ;         ;
+; Reg.vhd                          ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Reg.vhd                          ;         ;
+; RegPulseGenerator.vhd            ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/RegPulseGenerator.vhd            ;         ;
+; Counter4Bits.vhd                 ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter4Bits.vhd                 ;         ;
+; Bin7SegDecoder.vhd               ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Bin7SegDecoder.vhd               ;         ;
+; Counter5Bits.vhd                 ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter5Bits.vhd                 ;         ;
+; DiasDoMes.vhd                    ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DiasDoMes.vhd                    ;         ;
+; MeuCalendario.vhd                ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd                ;         ;
+; BCD.vhd                          ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd                          ;         ;
+; DispCntrl.vhd                    ; yes             ; User VHDL File               ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DispCntrl.vhd                    ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; aglobal171.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.1/quartus/libraries/megafunctions/aglobal171.inc      ;         ;
+; db/lpm_divide_k9m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/lpm_divide_k9m.tdf            ;         ;
+; db/sign_div_unsign_9kh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/sign_div_unsign_9kh.tdf       ;         ;
+; db/alt_u_div_64f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/alt_u_div_64f.tdf             ;         ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/add_sub_7pc.tdf               ;         ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/add_sub_8pc.tdf               ;         ;
+; db/lpm_divide_ghm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/lpm_divide_ghm.tdf            ;         ;
+; db/sign_div_unsign_8kh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/sign_div_unsign_8kh.tdf       ;         ;
+; db/alt_u_div_44f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/alt_u_div_44f.tdf             ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimated Total logic elements              ; 358            ;
+;                                             ;                ;
+; Total combinational functions               ; 303            ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 100            ;
+;     -- 3 input functions                    ; 45             ;
+;     -- <=2 input functions                  ; 158            ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 205            ;
+;     -- arithmetic mode                      ; 98             ;
+;                                             ;                ;
+; Total registers                             ; 168            ;
+;     -- Dedicated logic registers            ; 168            ;
+;     -- I/O registers                        ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 88             ;
+;                                             ;                ;
+; Embedded Multiplier 9-bit elements          ; 0              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; CLOCK_50~input ;
+; Maximum fan-out                             ; 168            ;
+; Total fan-out                               ; 1468           ;
+; Average fan-out                             ; 2.27           ;
++---------------------------------------------+----------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                     ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                         ; Entity Name         ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |MeuCalendario                            ; 303 (0)             ; 168 (0)                   ; 0           ; 0            ; 0       ; 0         ; 88   ; 0            ; |MeuCalendario                                                                                                              ; MeuCalendario       ; work         ;
+;    |BCD:DiasBCD|                          ; 36 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD                                                                                                  ; BCD                 ; work         ;
+;       |lpm_divide:Div0|                   ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Div0                                                                                  ; lpm_divide          ; work         ;
+;          |lpm_divide_ghm:auto_generated|  ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated                                                    ; lpm_divide_ghm      ; work         ;
+;             |sign_div_unsign_8kh:divider| ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated|sign_div_unsign_8kh:divider                        ; sign_div_unsign_8kh ; work         ;
+;                |alt_u_div_44f:divider|    ; 17 (17)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated|sign_div_unsign_8kh:divider|alt_u_div_44f:divider  ; alt_u_div_44f       ; work         ;
+;       |lpm_divide:Mod0|                   ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Mod0                                                                                  ; lpm_divide          ; work         ;
+;          |lpm_divide_k9m:auto_generated|  ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated                                                    ; lpm_divide_k9m      ; work         ;
+;             |sign_div_unsign_9kh:divider| ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider                        ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_64f:divider|    ; 19 (19)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:DiasBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_64f:divider  ; alt_u_div_64f       ; work         ;
+;    |BCD:MesesBCD|                         ; 36 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD                                                                                                 ; BCD                 ; work         ;
+;       |lpm_divide:Div0|                   ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_ghm:auto_generated|  ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated                                                   ; lpm_divide_ghm      ; work         ;
+;             |sign_div_unsign_8kh:divider| ; 17 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated|sign_div_unsign_8kh:divider                       ; sign_div_unsign_8kh ; work         ;
+;                |alt_u_div_44f:divider|    ; 17 (17)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Div0|lpm_divide_ghm:auto_generated|sign_div_unsign_8kh:divider|alt_u_div_44f:divider ; alt_u_div_44f       ; work         ;
+;       |lpm_divide:Mod0|                   ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_k9m:auto_generated|  ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated                                                   ; lpm_divide_k9m      ; work         ;
+;             |sign_div_unsign_9kh:divider| ; 19 (0)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_64f:divider|    ; 19 (19)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|BCD:MesesBCD|lpm_divide:Mod0|lpm_divide_k9m:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_64f:divider ; alt_u_div_64f       ; work         ;
+;    |Bin7SegDecoder:Bin7SegDecoder|        ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Bin7SegDecoder:Bin7SegDecoder                                                                                ; Bin7SegDecoder      ; work         ;
+;    |Counter4Bits:CounterDosAnos1|         ; 9 (9)               ; 5 (5)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter4Bits:CounterDosAnos1                                                                                 ; Counter4Bits        ; work         ;
+;    |Counter4Bits:CounterDosAnos2|         ; 9 (9)               ; 5 (5)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter4Bits:CounterDosAnos2                                                                                 ; Counter4Bits        ; work         ;
+;    |Counter4Bits:CounterDosAnos3|         ; 10 (10)             ; 5 (5)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter4Bits:CounterDosAnos3                                                                                 ; Counter4Bits        ; work         ;
+;    |Counter4Bits:CounterDosAnos4|         ; 8 (8)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter4Bits:CounterDosAnos4                                                                                 ; Counter4Bits        ; work         ;
+;    |Counter5Bits:CounterDosDias|          ; 19 (19)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter5Bits:CounterDosDias                                                                                  ; Counter5Bits        ; work         ;
+;    |Counter5Bits:CounterDosMeses|         ; 18 (18)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Counter5Bits:CounterDosMeses                                                                                 ; Counter5Bits        ; work         ;
+;    |DiasDoMes:DiasDoMes|                  ; 4 (4)               ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|DiasDoMes:DiasDoMes                                                                                          ; DiasDoMes           ; work         ;
+;    |DispCntrl:DispCntrl|                  ; 13 (13)             ; 9 (9)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|DispCntrl:DispCntrl                                                                                          ; DispCntrl           ; work         ;
+;    |Mux:Mux|                              ; 20 (20)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Mux:Mux                                                                                                      ; Mux                 ; work         ;
+;    |Reg:dispAnos0|                        ; 16 (16)             ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispAnos0                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispAnos1|                        ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispAnos1                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispAnos2|                        ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispAnos2                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispAnos3|                        ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispAnos3                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispDias0|                        ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispDias0                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispDias1|                        ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispDias1                                                                                                ; Reg                 ; work         ;
+;    |Reg:dispMes0|                         ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispMes0                                                                                                 ; Reg                 ; work         ;
+;    |Reg:dispMes1|                         ; 1 (1)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|Reg:dispMes1                                                                                                 ; Reg                 ; work         ;
+;    |RegPulseGenerator:RegPulseGenerator|  ; 96 (96)             ; 62 (62)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |MeuCalendario|RegPulseGenerator:RegPulseGenerator                                                                          ; RegPulseGenerator   ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |MeuCalendario|DispCntrl:DispCntrl|Present_state                                                                                                                                ;
++--------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+--------------------+
+; Name               ; Present_state.s8 ; Present_state.s7 ; Present_state.s6 ; Present_state.s5 ; Present_state.s4 ; Present_state.s3 ; Present_state.s2 ; Present_state.s1 ; Present_state.idle ;
++--------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+--------------------+
+; Present_state.idle ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                  ;
+; Present_state.s1   ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 1                  ;
+; Present_state.s2   ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 1                  ;
+; Present_state.s3   ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 1                  ;
+; Present_state.s4   ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 1                  ;
+; Present_state.s5   ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 1                  ;
+; Present_state.s6   ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                  ;
+; Present_state.s7   ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                  ;
+; Present_state.s8   ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                  ;
++--------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+--------------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; DiasDoMes:DiasDoMes|s_value[5..15]     ; Stuck at GND due to stuck port data_in ;
+; DiasDoMes:DiasDoMes|valOut[2..4]       ; Stuck at VCC due to stuck port data_in ;
+; DiasDoMes:DiasDoMes|s_value[16..30]    ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 29 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 168   ;
+; Number of registers using Synchronous Clear  ; 63    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 96    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; Counter5Bits:CounterDosMeses|s_value[0] ; 6       ;
+; Counter5Bits:CounterDosDias|s_value[0]  ; 5       ;
+; DiasDoMes:DiasDoMes|s_value[31]         ; 2       ;
+; DiasDoMes:DiasDoMes|s_value[0]          ; 2       ;
+; Total number of inverted registers = 4  ;         ;
++-----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispDias0|dataOut[4]                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispDias1|dataOut[0]                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispMes0|dataOut[5]                   ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispMes1|dataOut[0]                   ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispAnos0|dataOut[4]                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispAnos1|dataOut[1]                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispAnos2|dataOut[4]                  ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |MeuCalendario|Reg:dispAnos3|dataOut[4]                  ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |MeuCalendario|Counter5Bits:CounterDosDias|s_value[1]    ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |MeuCalendario|Counter5Bits:CounterDosMeses|s_value[5]   ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |MeuCalendario|Counter4Bits:CounterDosAnos1|s_value[3]   ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |MeuCalendario|Counter4Bits:CounterDosAnos2|s_value[3]   ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |MeuCalendario|Counter4Bits:CounterDosAnos3|s_value[3]   ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |MeuCalendario|Counter4Bits:CounterDosAnos4|s_value[0]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |MeuCalendario|DispCntrl:DispCntrl|Present_state         ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; No         ; |MeuCalendario|Mux:Mux|Mux0                              ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; No         ; |MeuCalendario|Bin7SegDecoder:Bin7SegDecoder|decOut_n[4] ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |MeuCalendario|Bin7SegDecoder:Bin7SegDecoder|decOut_n[3] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos1 ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; max            ; 9     ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos2 ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; max            ; 9     ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos3 ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; max            ; 9     ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Counter4Bits:CounterDosAnos4 ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; max            ; 9     ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Mux:Mux ;
++----------------+-------+-----------------------------+
+; Parameter Name ; Value ; Type                        ;
++----------------+-------+-----------------------------+
+; size           ; 4     ; Signed Integer              ;
++----------------+-------+-----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispDias1 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispDias0 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispMes1 ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; n              ; 7     ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispMes0 ;
++----------------+-------+----------------------------------+
+; Parameter Name ; Value ; Type                             ;
++----------------+-------+----------------------------------+
+; n              ; 7     ; Signed Integer                   ;
++----------------+-------+----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispAnos0 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispAnos1 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispAnos2 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Reg:dispAnos3 ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; n              ; 7     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BCD:MesesBCD|lpm_divide:Mod0 ;
++------------------------+----------------+-------------------------------------+
+; Parameter Name         ; Value          ; Type                                ;
++------------------------+----------------+-------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                             ;
+; LPM_WIDTHD             ; 5              ; Untyped                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                             ;
+; CBXI_PARAMETER         ; lpm_divide_k9m ; Untyped                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                      ;
++------------------------+----------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BCD:DiasBCD|lpm_divide:Div0 ;
++------------------------+----------------+------------------------------------+
+; Parameter Name         ; Value          ; Type                               ;
++------------------------+----------------+------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                            ;
+; CBXI_PARAMETER         ; lpm_divide_ghm ; Untyped                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                     ;
++------------------------+----------------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BCD:DiasBCD|lpm_divide:Mod0 ;
++------------------------+----------------+------------------------------------+
+; Parameter Name         ; Value          ; Type                               ;
++------------------------+----------------+------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                            ;
+; LPM_WIDTHD             ; 5              ; Untyped                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                            ;
+; CBXI_PARAMETER         ; lpm_divide_k9m ; Untyped                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                     ;
++------------------------+----------------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: BCD:MesesBCD|lpm_divide:Div0 ;
++------------------------+----------------+-------------------------------------+
+; Parameter Name         ; Value          ; Type                                ;
++------------------------+----------------+-------------------------------------+
+; LPM_WIDTHN             ; 5              ; Untyped                             ;
+; LPM_WIDTHD             ; 4              ; Untyped                             ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                             ;
+; LPM_PIPELINE           ; 0              ; Untyped                             ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                             ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                             ;
+; CBXI_PARAMETER         ; lpm_divide_ghm ; Untyped                             ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                             ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                             ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                          ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                        ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                        ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                      ;
++------------------------+----------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Counter4Bits:CounterDosAnos4"                                                          ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; termcnt ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------+
+; Port Connectivity Checks: "Counter5Bits:CounterDosMeses" ;
++-----------+-------+----------+---------------------------+
+; Port      ; Type  ; Severity ; Details                   ;
++-----------+-------+----------+---------------------------+
+; max[3..2] ; Input ; Info     ; Stuck at VCC              ;
+; max[1..0] ; Input ; Info     ; Stuck at GND              ;
+; max[4]    ; Input ; Info     ; Stuck at GND              ;
++-----------+-------+----------+---------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 88                          ;
+; cycloneiii_ff         ; 168                         ;
+;     ENA               ; 95                          ;
+;     ENA SCLR          ; 1                           ;
+;     SCLR              ; 62                          ;
+;     plain             ; 10                          ;
+; cycloneiii_lcell_comb ; 304                         ;
+;     arith             ; 98                          ;
+;         2 data inputs ; 82                          ;
+;         3 data inputs ; 16                          ;
+;     normal            ; 206                         ;
+;         0 data inputs ; 9                           ;
+;         1 data inputs ; 5                           ;
+;         2 data inputs ; 63                          ;
+;         3 data inputs ; 29                          ;
+;         4 data inputs ; 100                         ;
+;                       ;                             ;
+; Max LUT depth         ; 8.70                        ;
+; Average LUT depth     ; 4.25                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+    Info: Processing started: Sat Jun 19 00:23:08 2021
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Calendario1 -c Calendario1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Warning (12090): Entity "Mux" obtained from "Mux.vhd" instead of from Quartus Prime megafunction library File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Mux.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file mux.vhd
+    Info (12022): Found design unit 1: Mux-Behavioral File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Mux.vhd Line: 22
+    Info (12023): Found entity 1: Mux File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Mux.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file reg.vhd
+    Info (12022): Found design unit 1: Reg-Behavioral File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Reg.vhd Line: 11
+    Info (12023): Found entity 1: Reg File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Reg.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file regpulsegenerator.vhd
+    Info (12022): Found design unit 1: RegPulseGenerator-Behavioral File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/RegPulseGenerator.vhd Line: 14
+    Info (12023): Found entity 1: RegPulseGenerator File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/RegPulseGenerator.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file counter4bits.vhd
+    Info (12022): Found design unit 1: Counter4Bits-RTL File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter4Bits.vhd Line: 14
+    Info (12023): Found entity 1: Counter4Bits File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter4Bits.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file bin7segdecoder.vhd
+    Info (12022): Found design unit 1: Bin7SegDecoder-Behavioral File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Bin7SegDecoder.vhd Line: 12
+    Info (12023): Found entity 1: Bin7SegDecoder File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Bin7SegDecoder.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file counter5bits.vhd
+    Info (12022): Found design unit 1: Counter5Bits-RTL File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter5Bits.vhd Line: 14
+    Info (12023): Found entity 1: Counter5Bits File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/Counter5Bits.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file diasdomes.vhd
+    Info (12022): Found design unit 1: DiasDoMes-RTL File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DiasDoMes.vhd Line: 12
+    Info (12023): Found entity 1: DiasDoMes File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DiasDoMes.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file meucalendario.vhd
+    Info (12022): Found design unit 1: MeuCalendario-Structural File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 23
+    Info (12023): Found entity 1: MeuCalendario File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file bcd.vhd
+    Info (12022): Found design unit 1: BCD-BehaVioral File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 12
+    Info (12023): Found entity 1: BCD File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file dispcntrl.vhd
+    Info (12022): Found design unit 1: DispCntrl-v9 File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DispCntrl.vhd Line: 13
+    Info (12023): Found entity 1: DispCntrl File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/DispCntrl.vhd Line: 4
+Info (12127): Elaborating entity "MeuCalendario" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at MeuCalendario.vhd(17): used implicit default value for signal "LEDG" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+Warning (10541): VHDL Signal Declaration warning at MeuCalendario.vhd(18): used implicit default value for signal "LEDR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+Info (12129): Elaborating entity "RegPulseGenerator" using architecture "A:behavioral" for hierarchy "RegPulseGenerator:RegPulseGenerator" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 54
+Info (12129): Elaborating entity "DiasDoMes" using architecture "A:rtl" for hierarchy "DiasDoMes:DiasDoMes" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 60
+Info (12129): Elaborating entity "Counter5Bits" using architecture "A:rtl" for hierarchy "Counter5Bits:CounterDosDias" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 66
+Info (12129): Elaborating entity "Counter4Bits" using architecture "A:rtl" for hierarchy "Counter4Bits:CounterDosAnos1" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 84
+Info (12129): Elaborating entity "BCD" using architecture "A:behavioral" for hierarchy "BCD:DiasBCD" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 119
+Info (12129): Elaborating entity "Mux" using architecture "A:behavioral" for hierarchy "Mux:Mux" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 129
+Info (12129): Elaborating entity "Bin7SegDecoder" using architecture "A:behavioral" for hierarchy "Bin7SegDecoder:Bin7SegDecoder" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 143
+Info (12129): Elaborating entity "DispCntrl" using architecture "A:v9" for hierarchy "DispCntrl:DispCntrl" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 147
+Info (12129): Elaborating entity "Reg" using architecture "A:behavioral" for hierarchy "Reg:dispDias1" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 154
+Info (278001): Inferred 4 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BCD:MesesBCD|Mod0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 16
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BCD:DiasBCD|Div0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 15
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BCD:DiasBCD|Mod0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 16
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "BCD:MesesBCD|Div0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 15
+Info (12130): Elaborated megafunction instantiation "BCD:MesesBCD|lpm_divide:Mod0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 16
+Info (12133): Instantiated megafunction "BCD:MesesBCD|lpm_divide:Mod0" with the following parameter: File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 16
+    Info (12134): Parameter "LPM_WIDTHN" = "5"
+    Info (12134): Parameter "LPM_WIDTHD" = "5"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_k9m.tdf
+    Info (12023): Found entity 1: lpm_divide_k9m File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/lpm_divide_k9m.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9kh File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/sign_div_unsign_9kh.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_64f.tdf
+    Info (12023): Found entity 1: alt_u_div_64f File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/alt_u_div_64f.tdf Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info (12023): Found entity 1: add_sub_7pc File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/add_sub_7pc.tdf Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info (12023): Found entity 1: add_sub_8pc File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/add_sub_8pc.tdf Line: 22
+Info (12130): Elaborated megafunction instantiation "BCD:DiasBCD|lpm_divide:Div0" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 15
+Info (12133): Instantiated megafunction "BCD:DiasBCD|lpm_divide:Div0" with the following parameter: File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/BCD.vhd Line: 15
+    Info (12134): Parameter "LPM_WIDTHN" = "5"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_ghm.tdf
+    Info (12023): Found entity 1: lpm_divide_ghm File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/lpm_divide_ghm.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_8kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_8kh File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/sign_div_unsign_8kh.tdf Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_44f.tdf
+    Info (12023): Found entity 1: alt_u_div_44f File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/db/alt_u_div_44f.tdf Line: 26
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "LEDG[0]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[1]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[2]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[3]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[4]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[5]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[6]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[7]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDG[8]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 17
+    Warning (13410): Pin "LEDR[0]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[1]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[2]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[3]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[4]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[7]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[8]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[9]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[10]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[11]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[12]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[13]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[14]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[15]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[16]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+    Warning (13410): Pin "LEDR[17]" is stuck at GND File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 18
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 3 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "KEY[0]" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 8
+    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 8
+    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/intelFPGA_lite/17.1/.LSD/Projeto/Fase1/MeuCalendario.vhd Line: 8
+Info (21057): Implemented 453 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 83 output pins
+    Info (21061): Implemented 365 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
+    Info: Peak virtual memory: 4815 megabytes
+    Info: Processing ended: Sat Jun 19 00:23:24 2021
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:18
+
+

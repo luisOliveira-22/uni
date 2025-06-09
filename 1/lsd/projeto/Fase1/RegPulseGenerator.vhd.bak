@@ -1,0 +1,60 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity RegPulseGenerator is
+	port(reset	  : in  std_logic;
+		  sysClk   : in  std_logic;
+		  pulseOut : out std_logic_vector(7 downto 0));
+		  
+end RegPulseGenerator;
+
+architecture Behavioral of RegPulseGenerator is
+
+	constant NUMBER_STEPS : positive := 6;
+	
+	subtype Tcounter is natural range 0 to (NUMBER_STEPS - 1);
+	signal s_Counter : TCounter;
+	
+	signal s_pulseOut : std_logic_vector(7 downto 0);
+	
+begin
+	count_proc : process(sysClk)
+	begin
+		if(rising_edge(sysClk)) then
+			if((reset = '1') or 
+				(s_counter >= (NUMBER_STEPS - 1))) then
+				s_counter <= 0;
+			else
+				s_counter <= s_counter + 1;
+			end if;
+		end if;
+	end process;
+	
+	s_pulseOut(0) <= '1' when (s_counter = 0) else '0';
+	
+	s_pulseOut(1) <= '1' when (s_counter = 1) else '0';
+	
+	s_pulseOut(2) <= '1' when (s_counter = 2) else '0';
+	
+	s_pulseOut(3) <= '1' when (s_counter = 3) else '0';
+	
+	s_pulseOut(4) <= '1' when (s_counter = 4) else '0';
+	
+	s_pulseOut(5) <= '1' when (s_counter = 5) else '0';
+	
+	s_pulseOut(6) <= '1' when ((s_counter = rem 2) = 0) else '0';
+	
+	s_pulseOut(7) <= '1' when ((s_counter >= 2) and (s_counter <= 3)) else '0';
+	
+	out_reg_proc : process(sysClk)
+	begin
+		if(rising_edge(sysClk)) then
+			if(reset = '1') then
+				pulseOut <= (others => '0');
+			else
+				pulseOut <= s_pulseOut;
+			end if;
+		end if;
+	end process;
+end Behavioral;

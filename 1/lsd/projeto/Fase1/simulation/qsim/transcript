@@ -1,0 +1,44 @@
+# do Calendario1.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:35:27 on Jun 18,2021
+# vcom -work work Calendario1.vho 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package cycloneive_atom_pack
+# -- Loading package cycloneive_components
+# -- Compiling entity Bin7SegDecoder
+# -- Compiling architecture structure of Bin7SegDecoder
+# End time: 17:35:27 on Jun 18,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 17:35:27 on Jun 18,2021
+# vcom -work work Bin7SegDecoder.vwf.vht 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Bin7SegDecoder_vhd_vec_tst
+# -- Compiling architecture Bin7SegDecoder_arch of Bin7SegDecoder_vhd_vec_tst
+# End time: 17:35:27 on Jun 18,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -novopt -c -t 1ps -L cycloneive -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.Bin7SegDecoder_vhd_vec_tst 
+# Start time: 17:35:28 on Jun 18,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.bin7segdecoder_vhd_vec_tst(bin7segdecoder_arch)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading cycloneive.cycloneive_atom_pack(body)
+# Loading cycloneive.cycloneive_components
+# Loading work.bin7segdecoder(structure)
+# Loading ieee.std_logic_arith(body)
+# Loading cycloneive.cycloneive_io_obuf(arch)
+# Loading cycloneive.cycloneive_io_ibuf(arch)
+# Loading cycloneive.cycloneive_lcell_comb(vital_lcell_comb)
+# after#31
+# End time: 17:35:29 on Jun 18,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

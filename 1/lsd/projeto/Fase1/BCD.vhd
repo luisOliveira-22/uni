@@ -1,0 +1,17 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity BCD is
+	port(input : in  std_logic_vector(4 downto 0);
+		  uni   : out std_logic_vector(3 downto 0);
+		  dez	  : out std_logic_vector(3 downto 0)
+		  );
+end BCD;
+
+architecture BehaVioral of BCD is
+	
+begin 
+	dez <= std_logic_vector(to_unsigned(to_Integer(unsigned(input))/10,4));
+	uni <= std_logic_vector(to_unsigned(to_Integer(unsigned(input))mod 10, 4));
+end Behavioral;

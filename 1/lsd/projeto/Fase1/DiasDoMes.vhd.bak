@@ -1,0 +1,32 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity DiasDoMes is
+	generic(MAX		: natural := 9);
+	port(clk			: in  std_logic;
+		  input   	: in  std_logic_vector(4 downto 0);
+		  valOut		: out std_logic_vector(4 downto 0)
+		  );
+end DiasDoMes;
+
+architecture RTL of DiasDoMes is
+
+	signal s_value : unsigned(3 downto 0);
+	
+begin
+	process(reset, clk)
+	begin	
+		if (rising_edge(clk)) then
+			s_value <= to_Integer(unsigned(input));
+			if(input = 1 or input = 3 or input = 5 or input = 7 or input = 8 or input = 10 or input = 12) then
+				valOut <= std_logic_vector(unsigned(31,5));
+			elsif(input = 4 or input = 6 or input = 9 or input = 11) then
+				valOut <= std_logic_vector(unsigned(30,5));
+			else then
+				valOut <= std_logic_vector(unsigned(28,5));
+			end if;
+		end if;
+	end process;
+
+end RTL;

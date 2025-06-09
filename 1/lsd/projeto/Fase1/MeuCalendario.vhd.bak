@@ -1,0 +1,73 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
+
+entity MeuCalendario is
+	port(SW			: in  std_logic_vector(0 downto 0);
+		  CLOCK_50	: in  std_logic;
+		  KEY			: in  std_logic_vector(2 downto 0);
+		  HEX0		: out std_logic_vector(6 downto 0);
+		  HEX1		: out std_logic_vector(6 downto 0);
+		  HEX2		: out std_logic_vector(6 downto 0);
+		  HEX3		: out std_logic_vector(6 downto 0);
+		  HEX4		: out std_logic_vector(6 downto 0);
+		  HEX5		: out std_logic_vector(6 downto 0);
+		  HEX6		: out std_logic_vector(6 downto 0);
+		  HEX7		: out std_logic_vector(6 downto 0);
+		  LEDG		: out std_logic_vector(8 downto 0);
+		  LEDR		: out std_logic_vector(17 downto 0));
+		  
+end MeuCalendario;
+
+
+architecture Structural of MeuCalendario is
+	
+	--clocks
+	signal s_clk, s_Enable_disp : std_logic;
+	
+	--Enables
+	signal s_D_Enable, s_M_Enable, s_Y1_Enable, s_Y2_Enable, s_Y3_Enable, s_Y4_Enable : std_logic := '0';
+	
+	--ValOut
+	signal s_D_Val, s_M_Val : std_logic_vector(4 downto 0);
+	signal s_Y1_Val, s_Y2_Val, s_Y3_Val, s_y4_Val : std_logic_vector(3 downto 0);
+
+	--Terms
+	signal s_D_Term, s_M_Term, s_Y1_Term, s_Y2_Term, s_Y3_Term, s_Y4_Term : std_logic := '0';
+	
+	--Max day of month
+	signal s_day : std_logic_vector(4 downto 0);
+	
+	--BCD Dez/Uni
+	signal s_D_uni, s_M_uni : std_logic_vector(3 downto 0);
+	signal s_D_dez, s_M_dez : std_logic_vector(3 downto 0);
+	
+	--Display refresh
+	signal s_Mux_sel 		: std_logic_vector(2 downto 0);
+	signal s_Mux_out 		: std_logic_vector(3 downto 0);
+	signal s_Reg_enable 	: std_logic_vector(7 downto 0);
+	signal s_data7			: std_logic_vector(6 downto 0);	
+	
+	
+begin
+	process(CLOCK_50)
+	begin
+		if (KEY(0)='1') then
+			LEDR(3 downto 0) <= "1011";
+		else
+			LEDR(3 downto 0) <= "1010";
+		end if;
+	end process;
+	
+	--clocks
+	RegPulseGenerator   : entity work.RegPulseGenerator(Behavioral)
+						port map(clkIn  => CLOCK_50,
+									reset   => SW(0),
+									timeClk  => s_clk,
+									dispclk 	=> s_Enable_disp);
+									
+	
+										
+										
+
+end Structural;
