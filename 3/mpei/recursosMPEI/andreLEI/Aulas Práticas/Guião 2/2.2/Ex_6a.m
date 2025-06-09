@@ -1,0 +1,1 @@
+probt=prob_teorica(7,8000,0.001)

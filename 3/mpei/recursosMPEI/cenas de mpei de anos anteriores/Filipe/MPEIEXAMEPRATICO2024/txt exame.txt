@@ -1,0 +1,36 @@
+⚠️⚠️⚠️ CLEAR + CLC  ⚠️⚠️⚠️
+
+
+----Cadeias de Markov----
+Matriz de Transição ij - probabilidade de ir do estado j para o estado i
+
+Matriz fundamental 𝑭 –representa o número médio de visitas a cada estado antes da absorção
+𝐹𝑗𝑖 número de vezes que um processo se encontra no estado 𝑠𝑗
+se começou no estado 𝑠i, soma da coluna i de F
+% F = (I-Q)^-1
+I = eye(length(Q));
+F = inv(I-Q)
+
+B - probabilidades de absorção 𝑏𝑗𝑖 no estado 𝑠𝑗 se se iniciar no estado 𝑠𝑖 podem ser obtidas
+através de:
+𝐵 = 𝑅 x F
+
+
+---Page Rank----
+Dead ends (sem links de saída)
+compor: coluna desse estado a ir para todos os estados
+fazer coluna de ones() a dividir pelo número de estados
+
+Spider traps:
+compor: A=prob*H+(1-prob)*ones(N)/N 
+
+
+
+----Filtro de Bloom----
+
+k = numero de funções de dispersão a usar
+probabilidade teórica do tamanho n do filtro, p_fp = (1 - exp(-k*num_words/i) )^k
+
+falso negativo -> procurar algo que existe e ele dizer que nao existe (deu negativo mas é flaso)
+
+falso positivo -> procurar algo que nao existe e ele dizer que existe (deu positivo mas é falso)
