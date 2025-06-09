@@ -1,0 +1,42 @@
+﻿@using LineUp.DTOs
+@model List<TransferenceDto>
+
+
+<div class="modal-content">
+    <button class="close-button">&times;</button>
+    <h2>Transferences</h2>
+   
+
+    <table class="transference-table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>To Team</th>
+                <th>From Team</th>
+                <th>Transf. Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transference in Model)
+            {
+                <tr>
+                    <td>@transference.Person_name</td>
+                    <td>@transference.DestinationClubName</td>
+                    <td>@transference.PreviousClubName</td>
+                    <td>@transference.Trans_value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination-controls">
+        @if (ViewBag.CurrentPage > 0)
+        {
+            <button class="transf-pagination" data-page="@(ViewBag.CurrentPage - 1)">Previous</button>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <button class="transf-pagination" data-page="@(ViewBag.CurrentPage + 1)">Next</button>
+        }
+    </div>
+</div>

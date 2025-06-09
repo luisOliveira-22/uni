@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "LineUp";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/features.css" />
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="budget">
+                <p>Transfer Budget:</p>
+                <h2>@ViewBag.TransferBudget.ToString("N2") €</h2>
+            </div>
+            <button id="listPlayers">List Club Players</button>
+            <button id="listEmployees">List Club Employees</button>
+            <button id="listTransferences">Transfers History</button> 
+            <button id="AddPlayer">Add Player</button>
+        </aside>
+
+        <main class="main-field">
+            <h1>LINE<span class="up">UP</span></h1>
+            <div id="boundariesField" class="field">
+                <div class="player position pos1" data-position="GR" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos2" data-position="DL" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos3" data-position="DC" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos4" data-position="DC" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos5" data-position="DR" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos6" data-position="MC" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos7" data-position="MO" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos8" data-position="MC" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos9" data-position="EE" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos10" data-position="ED" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+                <div class="player position pos11" data-position="PL" onclick="showOptions(this)">
+                    <div class="player-circle"></div>
+                    <span class="player-name"></span>
+                </div>
+            </div>
+            <div id="playerModal" class="player-modal hidden">
+                <ul id="playerList"></ul>
+            </div>
+        </main>
+
+        <aside class="sidebar">
+            <button id="openModalBtn" class="add-player">Buy Player</button>
+
+            <div id="myModal" class="modal">
+                <div id="modalBody">
+                </div>
+            </div>
+
+            <p class="coach">Coach<br><strong>@ViewBag.UserName</strong></p>
+        </aside>
+    </div>
+
+    <script src="@Url.Content("~/js/script.js")"></script>
+</body>
+</html>

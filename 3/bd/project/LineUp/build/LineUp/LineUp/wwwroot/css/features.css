@@ -1,0 +1,442 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #333;
+}
+  
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar, .reserves {
+  width: 20%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  background-color: #fdf6f0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reserves {
+  background-color: #fff4e6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.main-field {
+  flex-grow: 1;
+  /* background-color: #26a769; */
+  background: url('../assets/background.png') no-repeat center center;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  color: #fff;
+  font-size: 36px;
+}
+
+h1 .up {
+  color: #ff3d00;
+}
+
+.field {
+  position: relative;
+  width: 500px;
+  height: 700px;
+  margin: auto;
+  background: none;
+  border: 5px solid #233;
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+.field::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('../assets/field.jpeg') no-repeat center center;
+    background-size: cover;
+    opacity: 0.7; /* controla a visibilidade */
+    z-index: 0;
+}
+.player.position {
+    position: absolute; /* Or relative, depending on your field layout */
+    width: 50px; /* Adjust as needed for your circle size */
+    height: 50px;
+    display: flex; /* For centering content within */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    cursor: pointer;
+}
+
+.player-circle {
+    position: relative; 
+    width: 100%;
+    height: 100%;
+    background-color: #FFA500;  
+    border-radius: 50%;  
+    z-index: 1; 
+}
+
+.player-name {
+    position: absolute; 
+    color: white;
+    font-weight: bold;
+    font-size: 14px; 
+    text-align: center;
+    z-index: 2; 
+}
+
+.player {
+  position: absolute;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at center, #fca311, #ffffff);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  box-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Posições no campo */
+.pos1  { left: 44%; bottom: 5%; }   /* GR */
+.pos2  { left: 12%; bottom: 25%; }  /* DL */
+.pos3  { left: 33%; bottom: 20%; }  /* DC */
+.pos4  { left: 55%; bottom: 20%; }  /* DC */
+.pos5  { left: 76%; bottom: 25%; }  /* DR */
+.pos6  { left: 22%; bottom: 50%; }  /* MC */
+.pos7  { left: 44%; bottom: 55%; }  /* MC */
+.pos8  { left: 66%; bottom: 50%; }  /* MO */
+.pos9  { left: 13%; bottom: 75%; }  /* EE */
+.pos10 { left: 75%; bottom: 75%; }  /* ED */
+.pos11 { left: 44%; bottom: 85%; }  /* PL */
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: peachpuff;
+  border: none;
+  border-radius: 6px;
+}
+
+.reserve-player {
+  background-color: #91c788;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.add-player {
+  margin-top: 10px;
+  background-color: #fcbf49;
+}
+
+.coach {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.drag-info {
+  margin-top: auto;
+  padding: 10px;
+  background-color: #ffe5b4;
+  border-radius: 8px;
+  text-align: center;
+  font-style: italic;
+}  
+
+.subs button, .reserve-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.reserve-player, .subs button {
+  cursor: grab;
+}
+
+.substitute {
+  background-color: peachpuff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  margin: 4px 0;
+  text-align: center;
+  width: 100%;
+  cursor: grab;
+}
+ 
+/*modal style*/
+.modal {
+    display: none;
+    position: fixed;
+    right: 600px;
+    top: 50px;
+    bottom: 100px;
+    left: 550px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden 
+}
+
+.modal-content {
+    background-color: #1f2937; /* dark gray */
+    color: white;
+    border-radius: 12px;
+    width: 120%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    display: flex;
+    max-height: 90vh;
+    position: fixed;
+    flex-direction: column;
+    padding: 20px; /* Add general padding for the modal content */
+    box-sizing: border-box; /* Crucial for width/height calculations */
+}
+
+.modal-scroll-content {
+    flex-grow: 1; /* Allows this div to take up available space */
+    overflow-y: auto; /* Enable scrolling only for this part */
+    padding: 0 10px; /* Add horizontal padding for scrollbar visibility and content spacing */
+    margin: 15px 0; /* Space between header/button and content */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.player-checkbox {
+    position: absolute; /* Take it out of flow */
+    opacity: 0; /* Make it completely transparent */
+    pointer-events: none; /* Ensure it doesn't interfere with label clicks */
+    width: 1px; /* Give it a minimal size */
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0); /* For older browsers/accessibility */
+}
+.player-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.selectable-tile {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #374151;
+    border-radius: 8px;
+    justify-content: normal;
+    cursor: pointer;
+    text-align: left;
+    background-color: #111827;
+    color: #f9fafb;
+    transition: all 0.2s ease-in-out;
+}
+
+.player-name-display {
+    text-align: left;
+    font-weight: bold;
+}
+
+.player-value-display {
+    color: #a3e635; 
+    left:10px;
+    right:20px;
+    font-weight: normal; 
+    font-size: 0.9em; 
+    white-space: nowrap; 
+}
+.player-rating-display {
+    color: #a3e635;
+    left: 10px;
+    font-weight: normal;
+    font-size: 0.9em;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked + label.selectable-tile {
+    background-color: #10b981;
+    color: white;
+    border-color: #059669;
+}
+/* Styles for the default disabled button */
+.buy-button-enabled {
+    background-color: #10b981; /* emerald-500 */
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.buy-button-enabled:hover {
+    background-color: #059669;
+}
+
+.buy-button-disabled {
+    background-color: #4b5563; /* gray-600 */
+    color: #9ca3af; /* gray-400 */
+    font-weight: bold;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #ef4444; /* red-500 */
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.transference-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .transference-table th, .transference-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .transference-table th {
+        background-color: #3c6694;
+        text-align: left;
+    }
+
+.player-list-only {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.player-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 12px;
+}
+.edit-btn {
+    background: none;
+    border: none;
+    color: deepskyblue;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btns-display {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* optional spacing */
+}
+
+.btn-divider {
+    width: 2px;
+    height: 24px;
+    background-color: white;
+    margin: 0 5px;
+}
+
+.filter-bar-wrapper {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#filterType {
+    background-color: transparent;
+}
+
+.filter-bar select,
+.filter-bar button {
+    padding: 2px 5px;
+    font-size: 14px;
+    border-radius: 2px;
+    border: 1px #ccc;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 5px;
+}
+    .sort-buttons button {
+        background-color: transparent;
+        color: gray;
+        border: none;
+        font-size: 18px;
+    }
+    .sort-buttons button.active {
+        color: white; 
+    }
+
+.hidden {
+    display: none;
+}
+
+.filter-bar select option {
+    background-color: #222;
+    color: white;
+}
+
+#positionSelect {
+    background-color: transparent;
+}

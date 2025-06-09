@@ -1,0 +1,128 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flow;
+    overflow-y: hidden;
+}
+
+.bg-wrapper {
+    background: #555b60; /* Background color */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+.form-box {
+    background: #343a40; /* Dark background color for the form box */
+    border-radius: 8px;
+    padding: 2rem;
+    top: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Slightly darker shadow for better visibility */
+    max-width: 500px; /* Increase max-width to make it wider */
+    width: 100%; /* Adjust width as needed */
+    color: #f8f9fa; /* Light text color for the form box */
+    height: auto;
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+    .form-box h2 {
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: #f8f9fa; /* Light text color for the heading */
+    }
+
+.extra-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.col-md {
+    padding-bottom: 1px;
+}
+
+.extra-link a {
+    color: #007bff; /* Link color */
+    text-decoration: none;
+}
+
+    .extra-link a:hover {
+        text-decoration: underline;
+    }
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid #6c757d; /* Slightly darker bottom border */
+    padding: 10px; /* Adjust vertical padding */
+    background-color: #495057; /* Darker background for input fields */
+    color: #f8f9fa;
+    border-radius: 5px; /* Add rounded corners to input fields */
+    margin-bottom: 1rem; /* Add some space between input fields */
+    font-size: 1.1rem; /* Make text bigger */
+    padding: 12px 14px; /* More space: inside the input */
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-bottom-color: #007bff; /* Highlight bottom border on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+.form-control, .btn {
+    width: 95%; /* Full width */
+    display: block; /* Ensure it behaves like a block element */
+}
+
+.form-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+    display: block; /* Ensure it's on its own line */
+}
+
+.form-check {
+    margin-bottom: 1rem;
+    padding-left: 1.5em; /* Adjust for the checkbox */
+}
+
+.form-check-input {
+    float: left;
+    margin-left: -1.5em;
+}
+
+.form-check-label {
+    color: #f8f9fa;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+    font-size: 15px;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+/* Hide the label as the placeholder is used */
+
+body {
+}

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // optional if already defined in _ViewStart.cshtml
+}
+
+<div class="intro-section text-center mt-5 pt-5">
+    <h1 class="display-4">Welcome to LineUp</h1>
+    <p class="lead">Manage your lineups easily and efficiently.</p>
+    <div class="intro-buttons mt-4">
+        <a href="@Url.Action("Login","Account")" class="btn btn-primary btn-lg">Login</a>
+        <a href="@Url.Action("Register","Account")" class="btn btn-outline-primary btn-lg">Register</a>
+    </div>
+</div>

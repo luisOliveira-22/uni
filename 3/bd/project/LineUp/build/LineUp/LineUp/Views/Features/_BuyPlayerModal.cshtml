@@ -1,0 +1,72 @@
+﻿@using LineUp.DTOs
+@model List<PlayerViewDto>
+@{
+    var positions = new[] { "GR", "DL", "DC", "DR", "MC", "MO", "EE", "ED", "PL" };
+}
+<div class="modal-content" data-budget=@ViewBag.TransferBudget>
+    <button class="close-button">&times;</button>
+    <h2>Players to Buy</h2>
+    <div class="filter-bar-wrapper">
+        <div class="filter-bar">
+            <div class="left-section">
+                <label for="Position" style="color: white;">Position:</label>
+                <select id="positionSelect">
+                    <option value="" selected>Any</option>
+                    @foreach (var pos in positions)
+                    {
+                        <option value="@pos">@pos</option>
+                    }
+                </select>
+            </div>
+
+            
+            <div class="right-section">
+                <select id="filterType">
+                    <option value="value">Market Value</option>
+                    <option value="rating">Rating</option>
+                </select>
+                <div id="sortOptions" class="sort-buttons">
+                    <button id="ascBtn">↑</button>
+                    <button id="descBtn">↓</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @foreach (var player in Model)
+        {
+            var checkboxId = $"player_{player.PlayerId}";
+            <div>
+                <input 
+                type="checkbox" 
+                id="@checkboxId" 
+                class="player-checkbox"
+                value="@player.PlayerId"
+                marketValue="@player.MarketValue" />
+                <label for="@checkboxId" class="selectable-tile">
+                    <div class="player-info-row">
+                        <span class="player-rating-display">@player.Rating</span>
+                        <span class="player-name-display">@player.Person_name</span>
+                        <span class="player-value-display">€@player.MarketValue</span>
+                    </div>
+                </label>
+            </div>
+        }
+    </div> 
+    <div class="pagination-controls">
+        @if (ViewBag.CurrentPage > 0)
+        {
+            <button class="buy-pagination" data-page="@(ViewBag.CurrentPage - 1)">Previous</button>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <button class="buy-pagination" data-page="@(ViewBag.CurrentPage + 1)">Next</button>
+        }
+    </div>
+
+    <button id="buyButton" class="mt-4 px-4 py-2 rounded buy-button-disabled">
+        Buy
+    </button>
+</div>

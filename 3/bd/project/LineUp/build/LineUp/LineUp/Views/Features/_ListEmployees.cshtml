@@ -1,0 +1,40 @@
+﻿@using LineUp.DTOs
+@model List<EmployeeViewDto>
+
+
+<div class="modal-content">
+    <button class="close-button">&times;</button>
+    <h2>Employees</h2>
+
+
+    <table class="transference-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Departament</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>@employee.Person_name</td>
+                    <td>@employee.DepName</td>
+                    <td style="padding-left: 10px">@employee.Emp_function</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination-controls">
+        @if (ViewBag.CurrentPage > 0)
+        {
+            <button class="employee-pagination" data-page="@(ViewBag.CurrentPage - 1)">Previous</button>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <button class="employee-pagination" data-page="@(ViewBag.CurrentPage + 1)">Next</button>
+        }
+    </div>
+</div>

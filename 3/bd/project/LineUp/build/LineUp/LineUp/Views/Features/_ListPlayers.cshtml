@@ -1,0 +1,37 @@
+﻿@using LineUp.DTOs
+@model List<PlayerViewDto>
+
+<div class="modal-content">
+    <button class="close-button">&times;</button>
+    <h2>Club Players</h2>
+    <input type="text" id="playerSearch" placeholder="Search players..." class="search-input" />
+
+    <ul class="player-list-only" id="playerList">
+        @foreach (var player in Model)
+        {
+            <li class="player-display" data-player-id="@player.PlayerId">
+                <span>@player.Person_name</span>
+                <div class="btns-display">
+                    <button class="edit-btn" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <div class="btn-divider"></div>
+                    <button class="delete-btn" title="Delete">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </li>
+        }
+    </ul>
+    <div class="pagination-controls">
+        @if (ViewBag.CurrentPage > 0)
+        {
+            <button class="list-players-pagination" data-page="@(ViewBag.CurrentPage - 1)">Previous</button>
+        }
+        
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <button class="list-players-pagination" data-page="@(ViewBag.CurrentPage + 1)">Next</button>
+        }
+    </div>
+</div>

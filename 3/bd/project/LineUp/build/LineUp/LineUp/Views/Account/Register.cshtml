@@ -1,0 +1,72 @@
+﻿@model RegisterVM
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+          crossorigin="anonymous">
+    <link href="~/css/register.css" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-wrapper">
+        <div class="form-box">
+            <h2 class="text-center mb-4">Sign up</h2>
+            <form asp-action="Register">
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="username" class="form-label me-2 mb-0">Username</label>
+                        <span asp-validation-for="Username" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="Username" type="text" class="form-control" id="username">
+                    
+                </div>
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="Email" class="form-label me-2 mb-0">Email</label>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="Email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="Password" class="form-label me-2 mb-0">Password</label>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="Club_name" class="form-label me-2 mb-0">Club Name</label>
+                        <span asp-validation-for="Club_name" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="Club_name" type="text" class="form-control" id="club_name">
+                </div>
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="Foundation_Date" class="form-label me-2 mb-0">Foundation Date</label>
+                        <span asp-validation-for="FoundationDate" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="FoundationDate" type="date" class="form-control" id="club_name">
+                </div>
+
+                <div class="form-group">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="Transfer_budget" class="form-label me-2 mb-0">Initial Budget</label>
+                        <span asp-validation-for="TransferBudget" class="text-danger small"></span>
+                    </div>
+                    <input asp-for="TransferBudget" type="text" class="form-control" id="club_name">
+                </div>
+                <input method type="submit" value="Register" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿@model AddPlayerVM
+
+<div class="modal-content">
+    <button class="close-button">&times;</button>
+    <h2>Add Player</h2>
+    <form id="add-player-form" method="post">
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BirthDate"></label>
+            <input asp-for="BirthDate" class="form-control" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Position"></label>
+            <select asp-for="Position" class="form-control">
+                <option value="">-- Select Position --</option>
+                <option value="GR">GR</option>
+                <option value="DL">DL</option>
+                <option value="DC">DC</option>
+                <option value="DR">DR</option>
+                <option value="MC">MC</option>
+                <option value="MO">MO</option>
+                <option value="EE">EE</option>
+                <option value="ED">ED</option>
+                <option value="PL">PL</option>
+                
+            </select>
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Rating"></label>
+            <input asp-for="Rating" type="number" class="form-control" />
+            <span asp-validation-for="Rating" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MarketValue"></label>
+            <input asp-for="MarketValue" type="number" class="form-control" />
+            <span asp-validation-for="MarketValue" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Player</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

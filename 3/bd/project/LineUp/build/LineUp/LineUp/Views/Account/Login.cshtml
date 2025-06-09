@@ -1,0 +1,43 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = null; 
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign in</title>
+    <meta charset="UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+          crossorigin="anonymous">
+    <link href="~/css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg-wrapper">
+        <div class="form-box">
+            <h2 class="text-center mb-4">Sign in</h2>
+            <form asp-action="Login" method="post">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" asp-for="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input asp-for="Password" class="form-control" >
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <input type="submit" value="Login" class="btn btn-primary">
+            </form>
+            <div class="extra-link text-center mt-3">
+                <a asp-action="Register">Don't have an account? Sign up</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
